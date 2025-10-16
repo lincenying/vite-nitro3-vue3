@@ -7,8 +7,16 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "prepare": "nitro prepare",
+    "serve": "cross-env PORT=18422 vite dev",
+    "preview": "cross-env PORT=8422 node .output/server/index.mjs",
     "build": "vite build",
-    "serve": "vite dev"
+    "type-check": "vue-tsc --build",
+    "preview:vue": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:ts": "vue-tsc --noEmit",
+    "lint:css": "stylelint '**/*.{css,scss}' --fix"
   },
   "dependencies": {
     "@lincy/async-validation": "^1.4.0",

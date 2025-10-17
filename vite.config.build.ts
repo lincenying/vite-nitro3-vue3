@@ -7,9 +7,9 @@ const config: { build: BuildOptions } = {
         minify: true,
         assetsInlineLimit: 4096,
         chunkSizeWarningLimit: 1000,
-        outDir: '.output/public',
+        outDir: '.output/server',
         rollupOptions: {
-            input: './index.html',
+            input: './template.html',
             external: /static\/.*?\.[cm]*js/,
             output: {
                 manualChunks(id: string) {

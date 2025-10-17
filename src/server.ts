@@ -6,12 +6,14 @@ export default {
     async fetch(): Promise<Response> {
         let html = ''
         const __dirname = path.dirname(fileURLToPath(import.meta.url))
-        if (import.meta.env?.DEV) {
-            html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf-8')
+        if (import.meta.env?.VITE_APP_ENV === 'development') {
+            // __dirname = 'src'
+            html = fs.readFileSync(path.resolve(__dirname, '../template.html'), 'utf-8')
             html = html.replace('<!--vite-client-->', '<script type="module" src="/@vite/client"></script>')
         }
         else {
-            html = fs.readFileSync(path.resolve(__dirname, '../../../public/index.html'), 'utf-8')
+            // __dirname = '.output/server/chunks/build'
+            html = fs.readFileSync(path.resolve(__dirname, '../../../server/template.html'), 'utf-8')
         }
         return new Response(html, {
             headers: {

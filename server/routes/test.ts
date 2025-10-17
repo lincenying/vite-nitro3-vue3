@@ -1,7 +1,6 @@
-import path from 'node:path'
-import process from 'node:process'
 import { defineEventHandler } from 'h3'
 import Twig from 'twig'
+import { getTemplateDir } from '~server/utils'
 
 export default defineEventHandler(async () => {
     const data = {
@@ -10,12 +9,16 @@ export default defineEventHandler(async () => {
         },
         user: '林岑影',
     }
-    const templateDir = path.join(process.cwd(), 'server/template/index.twig')
-    const html = await new Promise((resove) => {
+    const templateDir = getTemplateDir('./template/index.twig')
+    const html = await new Promise<string>((resove) => {
         Twig.renderFile(templateDir, data, (err, html) => {
             resove(err ? err.toString() : html)
         })
     })
 
-    return html
+    return new Response(html, {
+        headers: {
+            'Content-Type': 'text/html',
+        },
+    })
 })

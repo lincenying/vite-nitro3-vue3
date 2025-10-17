@@ -43,7 +43,11 @@ export default defineConfig(({ mode }: ConfigEnv) => {
             ...Components(),
             nitro({
                 config: {
-
+                    output: {
+                        dir: '.output',
+                        serverDir: '.output/server',
+                        publicDir: '.output/server',
+                    },
                 },
                 services: {
                     ssr: {

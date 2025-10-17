@@ -24,28 +24,6 @@ export default defineNitroConfig({
             swr: false,
         },
     },
-    // 将vite编译后的静态资源文件存入服务端
-    publicAssets: [
-        {
-            baseURL: '/assets/',
-            // 相对 `srcDir` 文件夹
-            dir: '../dist/assets/',
-        },
-        {
-            baseURL: '/static/',
-            // 相对 `srcDir` 文件夹
-            dir: '../dist/static/',
-        },
-    ],
-    // 将vite编译后的html文件写入服务端资产
-    serverAssets: [
-        {
-            baseName: 'appTemplate',
-            // 相对 `srcDir` 文件夹
-            dir: '../dist',
-            ignore: ['static', 'assets'],
-        },
-    ],
     // 开启本地文件K/V存储
     storage: {
         fsdb: {
@@ -81,7 +59,7 @@ export default defineNitroConfig({
         tsConfig: {
             compilerOptions: {
                 noEmit: false,
-                outDir: 'dist',
+                outDir: '.output',
             },
         },
     },

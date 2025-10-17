@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import pkg from 'mockjs'
 
 const { Random } = pkg
@@ -21,4 +24,13 @@ export function getRandomNumber(min: number, max: number): number {
         throw new Error('Minimum value cannot be greater than maximum value')
     }
     return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+export function getTemplateDir(file: string) {
+    const templateRoot = process.cwd()
+    const fileDir = path.resolve(templateRoot, file)
+    if (fs.existsSync(fileDir)) {
+        return fileDir
+    }
+    return path.resolve(templateRoot, `../${file}`)
 }

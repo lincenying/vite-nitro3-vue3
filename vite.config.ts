@@ -23,7 +23,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
     console.log(`当前编译环境: ${process.env.VITE_APP_ENV}`)
 
     return {
-        base: './',
+        base: '/',
         assetsInclude: [
             '/static/**',
         ],

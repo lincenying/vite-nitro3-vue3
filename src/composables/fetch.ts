@@ -1,7 +1,6 @@
 import type { H3Event } from 'h3'
 import type { FetchOptions } from 'ofetch'
 import { isFormData, objToCookies } from '@lincy/utils'
-import { appendResponseHeader } from 'h3'
 import { ofetch } from 'ofetch'
 import { normalizeCookiePath } from '~/utils'
 
@@ -61,7 +60,7 @@ export const useApi: (cookies?: Record<string, string | number | boolean>, H3Eve
                     const setCookies = response.headers.getSetCookie()
                     if (H3Event && setCookies && setCookies.length > 0) {
                         for (const cookie of setCookies) {
-                            appendResponseHeader(H3Event, 'set-cookie', normalizeCookiePath(cookie))
+                            H3Event.res.headers.append('set-cookie', normalizeCookiePath(cookie))
                         }
                     }
                     if (response._data.code !== 200) {

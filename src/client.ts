@@ -1,9 +1,5 @@
 import { createHead } from '@unhead/vue/client'
 
-import globalPlugin from '@/plugin/global'
-
-import { getContext, setClientInstanceProperties } from './composables/asyncData'
-
 //                            _ooOoo_
 //                           o8888888o
 //                           88" . "88
@@ -35,17 +31,21 @@ import { getContext, setClientInstanceProperties } from './composables/asyncData
 //                  别人笑我忒疯癫，我笑自己命太贱；
 //                  不见满街漂亮妹，哪个归得程序员？
 
+import globalPlugin from '@/plugin/global'
+
+import { getContext, setClientInstanceProperties } from './composables/asyncData'
+import { needSSR } from './config'
 import { createApp } from './main'
 
+import { routerBeforeResolve } from './router'
 import 'default-passive-events'
 import '@/polyfill/toFixed'
-
 import 'uno.css'
 import 'md-editor-v3/lib/style.css'
+
 import './assets/icon-font/icon-font.css'
 import './assets/scss/global/animate.min.css'
 import './assets/scss/global/global.scss'
-
 import './assets/scss/style.scss'
 
 console.log(`VITE_APP_ENV: ${import.meta.env.VITE_APP_ENV}`)
@@ -62,6 +62,9 @@ const productStore = useProductStore()
 productStore.getCategory()
 
 router.isReady().then(() => {
+    if (needSSR) {
+        routerBeforeResolve(router)
+    }
     app.use(head).use(globalPlugin).mount('#app')
     console.log('client router ready')
 })

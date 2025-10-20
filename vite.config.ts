@@ -79,5 +79,11 @@ export default defineConfig(({ mode }: ConfigEnv) => {
                 '@server': path.join(__dirname, './server'),
             },
         },
+        ssr: {
+            noExternal: [
+                'element-plus',
+                '@tato30/vue-pdf', 'pdfjs-dist',
+            ],
+        },
     }
 })

@@ -7,10 +7,24 @@ const config: { build: BuildOptions } = {
         minify: true,
         assetsInlineLimit: 4096,
         chunkSizeWarningLimit: 1000,
-        outDir: '.output/server',
+        outDir: '.output/public',
         rollupOptions: {
             input: './template.html',
-            external: /static\/.*?\.[cm]*js/,
+            external: [
+                /static\/.*?\.[cm]*js/,
+                'element-plus/es/components/focus-trap/style/css',
+                'element-plus/es/components/select-menu/style/css',
+                'element-plus/es/components/options/style/css',
+                'element-plus/es/components/roving-focus-item/style/css',
+                'element-plus/es/components/dropdown-item-impl/style/css',
+                'element-plus/es/components/roving-focus-collection-item/style/css',
+                'element-plus/es/components/collection/style/css',
+                'element-plus/es/components/slot/style/css',
+                'element-plus/es/components/only-child/style/css',
+                'element-plus/es/components/roving-focus-group/style/css',
+                'element-plus/es/components/focus-group-collection/style/css',
+                'element-plus/es/components/roving-focus-group-impl/style/css',
+            ],
             output: {
                 manualChunks(id: string) {
                     // 处理css分块

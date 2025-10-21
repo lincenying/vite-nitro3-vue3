@@ -86,6 +86,10 @@ pnpm lint:css # css 检测并修复
 具体参数可查看根目录的 `.env.xxx`, 其中 `development` 为开发环境, `production` 依次为 `生产环境`
 根据自己需要, 启动/编译不同的环境
 
+## SSR or SPA
+
+文件`vite.config.ts`里设置`entry: './src/server.ts'`为spa, `entry: './src/server.ssr.ts',`为ssr
+
 ## 自动引入UI库组件/项目组件/函数等
 
 项目已经配置了`unplugin-auto-import`和`unplugin-vue-components`

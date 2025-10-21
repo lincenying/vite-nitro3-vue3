@@ -10,6 +10,7 @@ import UnoCSS from 'unocss/vite'
 import { defineConfig, loadEnv } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 
+import { needSSR } from '~/config'
 import Build from './vite.config.build'
 import Components from './vite.config.components'
 import Css from './vite.config.css'
@@ -46,12 +47,14 @@ export default defineConfig(({ mode }: ConfigEnv) => {
                     output: {
                         dir: '.output',
                         serverDir: '.output/server',
-                        publicDir: '.output/server',
+                        publicDir: '.output/public',
                     },
                 },
                 services: {
                     ssr: {
-                        entry: './src/server.ts',
+                        entry: !needSSR ? './src/server.ts' : './src/server.ssr.ts',
+                        // entry: './src/server.ts', // ===> spa
+                        // entry: './src/server.ssr.ts', // ===> ssr
                     },
                 },
             }),
@@ -65,9 +68,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         environments: {
             client: {
                 build: {
-                    rollupOptions: {
-
-                    },
+                    rollupOptions: { },
                 },
             },
         },
@@ -82,7 +83,8 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         ssr: {
             noExternal: [
                 'element-plus',
-                '@tato30/vue-pdf', 'pdfjs-dist',
+                '@tato30/vue-pdf',
+                'pdfjs-dist',
             ],
         },
     }

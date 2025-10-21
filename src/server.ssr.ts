@@ -3,9 +3,11 @@ import path from 'node:path'
 import process from 'node:process'
 
 export default {
-    async fetch(): Promise<Response> {
+    async fetch(req: Request): Promise<Response> {
         let template = ''
+        let html
         const baseDir = process.cwd()
+        const url = new URL(req.url).pathname
         if (import.meta.env?.VITE_APP_ENV === 'development') {
             template = fs.readFileSync(path.resolve(baseDir, './template.html'), 'utf-8')
             template = template.replace('<!--vite-client-->', '<script type="module" src="/@vite/client"></script>')
@@ -13,7 +15,18 @@ export default {
         else {
             template = fs.readFileSync(path.resolve(baseDir, '.output/public/template.html'), 'utf-8')
         }
-        return new Response(template, {
+        const render = await import('./main.server').then(m => m.default)
+        const renderSSR = (await render(url, template, { req }))
+        // 处理跳转
+        if (typeof renderSSR === 'object') {
+            if ('body' in renderSSR)
+                html = renderSSR.body
+        }
+        // 正常返回html
+        else {
+            html = renderSSR
+        }
+        return new Response(html, {
             headers: {
                 'Content-Type': 'text/html',
             },

@@ -9,7 +9,13 @@ declare global {
   const $api: typeof import('./composables/fetch').$api
   const Delete: typeof import('./composables/alova').Delete
   const EffectScope: typeof import('vue').EffectScope
+  const ElButton: typeof import('element-plus/es').ElButton
+  const ElFocusGroupCollection: typeof import('element-plus/es').ElFocusGroupCollection
+  const ElIcon: typeof import('element-plus/es').ElIcon
   const ElMessage: typeof import('element-plus/es').ElMessage
+  const ElRovingFocusCollectionItem: typeof import('element-plus/es').ElRovingFocusCollectionItem
+  const ElRovingFocusItem: typeof import('element-plus/es').ElRovingFocusItem
+  const ElSelectMenu: typeof import('element-plus/es').ElSelectMenu
   const Get: typeof import('./composables/alova').Get
   const Post: typeof import('./composables/alova').Post
   const Put: typeof import('./composables/alova').Put

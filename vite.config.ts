@@ -10,7 +10,7 @@ import UnoCSS from 'unocss/vite'
 import { defineConfig, loadEnv } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 
-import { needSSR } from '~/config'
+import { needSSR } from './src/config'
 import Build from './vite.config.build'
 import Components from './vite.config.components'
 import Css from './vite.config.css'
@@ -31,7 +31,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         server: {
             open: true,
             hmr: {
-                port: 55373,
+                port: 55473,
             },
             warmup: {
                 clientFiles: ['./src/client.ts', './src/views/*.vue'],

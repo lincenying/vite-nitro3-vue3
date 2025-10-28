@@ -24,7 +24,7 @@ Object.keys(views).forEach((path: string) => {
 routes = routes.concat([{ path: '/:pathMatch(.*)', redirect: '/' }])
 
 const router = createRouter({
-    history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
+    history: isSSR ? createMemoryHistory() : createWebHistory(),
     routes,
 })
 

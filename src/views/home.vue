@@ -154,6 +154,10 @@ emitter.on('change-category', (newCategoryId) => {
     console.log('%c[newCategoryId] >> ', 'color: red', newCategoryId)
 })
 
+const unsubscribe = changeCategory.on((newCategoryId) => {
+    console.log('%c[newCategoryId] >> ', 'color: red', newCategoryId)
+})
+
 useHead({
     title: `产品展示 - ${appName}`,
 })
@@ -162,6 +166,7 @@ useSaveScroll()
 
 onUnmounted(() => {
     emitter.off('change-category')
+    unsubscribe()
 })
 
 onMounted(() => {

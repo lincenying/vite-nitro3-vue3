@@ -74,15 +74,17 @@ async function currentChange(newPage: number) {
     initFn('change-page')
 }
 
-function emitterFn() {
+function emitterFn(type: CommentCategoryType) {
     page = 1
     commentStore.getComment({ type, id, page }, $api)
     initFn('change-data')
 }
 
-emitter.on(`refresh-${props.type}-comment`, emitterFn)
+// emitter.on(`refresh-${props.type}-comment`, emitterFn)
+const unsubscribe = commentEvent[props.type].on(emitterFn)
 
 onUnmounted(() => {
-    emitter.off(`refresh-${props.type}-comment`, emitterFn)
+    // emitter.off(`refresh-${props.type}-comment`, emitterFn)
+    unsubscribe()
 })
 </script>

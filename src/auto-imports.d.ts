@@ -30,7 +30,9 @@ declare global {
   const casesDetailStore: typeof import('./composables/storage').casesDetailStore
   const casesListStore: typeof import('./composables/storage').casesListStore
   const casesStoreWithout: typeof import('./stores/use-cases-store').casesStoreWithout
+  const changeCategory: typeof import('./composables/emitter').changeCategory
   const clearState: typeof import('./composables/asyncData').clearState
+  const commentEvent: typeof import('./composables/emitter').commentEvent
   const commentStorage: typeof import('./composables/storage').commentStorage
   const commentStoreWithout: typeof import('./stores/use-comment-store').commentStoreWithout
   const computed: typeof import('vue').computed
@@ -93,9 +95,11 @@ declare global {
   const isReactive: typeof import('vue').isReactive
   const isReadonly: typeof import('vue').isReadonly
   const isRef: typeof import('vue').isRef
+  const isSSR: typeof import('./composables/index').isSSR
   const isShallow: typeof import('vue').isShallow
   const loginMsgBox: typeof import('./composables/message').loginMsgBox
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
+  const manualResetRef: typeof import('@vueuse/core').manualResetRef
   const markRaw: typeof import('vue').markRaw
   const newsCommentStore: typeof import('./composables/storage').newsCommentStore
   const newsDetailStore: typeof import('./composables/storage').newsDetailStore
@@ -144,8 +148,14 @@ declare global {
   const refAutoReset: typeof import('@vueuse/core').refAutoReset
   const refDebounced: typeof import('@vueuse/core').refDebounced
   const refDefault: typeof import('@vueuse/core').refDefault
+  const refManualReset: typeof import('@vueuse/core').refManualReset
   const refThrottled: typeof import('@vueuse/core').refThrottled
   const refWithControl: typeof import('@vueuse/core').refWithControl
+  const refreshArticleComment: typeof import('./composables/emitter').refreshArticleComment
+  const refreshCaseComment: typeof import('./composables/emitter').refreshCaseComment
+  const refreshFaqComment: typeof import('./composables/emitter').refreshFaqComment
+  const refreshNewsComment: typeof import('./composables/emitter').refreshNewsComment
+  const refreshProductComment: typeof import('./composables/emitter').refreshProductComment
   const resetSSRInstanceProperties: typeof import('./composables/asyncData').resetSSRInstanceProperties
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
@@ -154,6 +164,7 @@ declare global {
   const scrollToComment: typeof import('./composables/index').scrollToComment
   const scrollToNav: typeof import('./composables/index').scrollToNav
   const setClientInstanceProperties: typeof import('./composables/asyncData').setClientInstanceProperties
+  const setMenuActive: typeof import('./composables/emitter').setMenuActive
   const setupPinia: typeof import('./stores/index').setupPinia
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
@@ -426,7 +437,9 @@ declare module 'vue' {
     readonly casesDetailStore: UnwrapRef<typeof import('./composables/storage')['casesDetailStore']>
     readonly casesListStore: UnwrapRef<typeof import('./composables/storage')['casesListStore']>
     readonly casesStoreWithout: UnwrapRef<typeof import('./stores/use-cases-store')['casesStoreWithout']>
+    readonly changeCategory: UnwrapRef<typeof import('./composables/emitter')['changeCategory']>
     readonly clearState: UnwrapRef<typeof import('./composables/asyncData')['clearState']>
+    readonly commentEvent: UnwrapRef<typeof import('./composables/emitter')['commentEvent']>
     readonly commentStorage: UnwrapRef<typeof import('./composables/storage')['commentStorage']>
     readonly commentStoreWithout: UnwrapRef<typeof import('./stores/use-comment-store')['commentStoreWithout']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -489,9 +502,11 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isSSR: UnwrapRef<typeof import('./composables/index')['isSSR']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
     readonly loginMsgBox: UnwrapRef<typeof import('./composables/message')['loginMsgBox']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
+    readonly manualResetRef: UnwrapRef<typeof import('@vueuse/core')['manualResetRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly newsCommentStore: UnwrapRef<typeof import('./composables/storage')['newsCommentStore']>
     readonly newsDetailStore: UnwrapRef<typeof import('./composables/storage')['newsDetailStore']>
@@ -540,16 +555,22 @@ declare module 'vue' {
     readonly refAutoReset: UnwrapRef<typeof import('@vueuse/core')['refAutoReset']>
     readonly refDebounced: UnwrapRef<typeof import('@vueuse/core')['refDebounced']>
     readonly refDefault: UnwrapRef<typeof import('@vueuse/core')['refDefault']>
+    readonly refManualReset: UnwrapRef<typeof import('@vueuse/core')['refManualReset']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly refreshArticleComment: UnwrapRef<typeof import('./composables/emitter')['refreshArticleComment']>
+    readonly refreshCaseComment: UnwrapRef<typeof import('./composables/emitter')['refreshCaseComment']>
+    readonly refreshFaqComment: UnwrapRef<typeof import('./composables/emitter')['refreshFaqComment']>
+    readonly refreshNewsComment: UnwrapRef<typeof import('./composables/emitter')['refreshNewsComment']>
+    readonly refreshProductComment: UnwrapRef<typeof import('./composables/emitter')['refreshProductComment']>
     readonly resetSSRInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['resetSSRInstanceProperties']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
-    readonly resolveUnref: UnwrapRef<typeof import('@vueuse/core')['resolveUnref']>
     readonly routerKey: UnwrapRef<typeof import('./composables/provide')['routerKey']>
     readonly scrollToComment: UnwrapRef<typeof import('./composables/index')['scrollToComment']>
     readonly scrollToNav: UnwrapRef<typeof import('./composables/index')['scrollToNav']>
     readonly setClientInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['setClientInstanceProperties']>
+    readonly setMenuActive: UnwrapRef<typeof import('./composables/emitter')['setMenuActive']>
     readonly setupPinia: UnwrapRef<typeof import('./stores/index')['setupPinia']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>

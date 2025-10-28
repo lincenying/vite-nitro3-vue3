@@ -1,6 +1,9 @@
 import type { AnyFn } from '@vueuse/core'
 import ls from 'store2'
 
+/** 是否服务端渲染阶段 */
+export const isSSR = !!import.meta.env.SSR
+
 export function useGlobal() {
     const ins = getCurrentInstance()!
 
@@ -60,7 +63,7 @@ export function useLockFn(fn: AnyFn, autoUnlock: boolean | 'auto' = 'auto') {
 export function useSaveScroll() {
     const route = useRoute()
 
-    if (import.meta.env.SSR)
+    if (isSSR)
         return
 
     onMounted(() => {
@@ -97,7 +100,7 @@ export function useSaveScroll() {
  * @returns {void}
  */
 export function scrollToNav(navigation: Ref<HTMLElement | undefined>, adjust: number = 0): void {
-    if (import.meta.env.SSR)
+    if (isSSR)
         return
 
     // 获取导航元素相对于视口的顶部位置
@@ -121,7 +124,7 @@ export function scrollToNav(navigation: Ref<HTMLElement | undefined>, adjust: nu
  * @returns {void}
  */
 export function scrollToComment(commentBox: Ref<HTMLElement | undefined>, adjust: number = 0): void {
-    if (import.meta.env.SSR)
+    if (isSSR)
         return
 
     // 获取导航元素相对于视口的顶部位置

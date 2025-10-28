@@ -103,9 +103,6 @@ export function useAsyncData<DataT, ErrorT = unknown>(
     const instance = getAppInstance()!
     const initialState = instance.config.globalProperties.initialState
 
-    // 判断当前环境是否为服务端
-    const isServer = import.meta.env.SSR
-
     // 如果初始状态中存在对应key的数据，则赋值给asyncData.data
     if (key in initialState) {
         asyncData.data.value = initialState[key]
@@ -153,7 +150,7 @@ export function useAsyncData<DataT, ErrorT = unknown>(
     const fetchOnServer = options.server !== false
 
     // 在服务端且配置允许的情况下执行数据获取
-    if (isServer && fetchOnServer) {
+    if (isSSR && fetchOnServer) {
         const p = initialFetch()
         if (instance) {
             onServerPrefetch(() => p)
@@ -161,7 +158,7 @@ export function useAsyncData<DataT, ErrorT = unknown>(
     }
 
     // 在客户端且配置不允许服务端获取的情况下执行数据获取
-    if (!isServer && !fetchOnServer) {
+    if (!isSSR && !fetchOnServer) {
         initialFetch()
     }
 

@@ -12,7 +12,10 @@ declare global {
   const ElButton: typeof import('element-plus/es').ElButton
   const ElFocusGroupCollection: typeof import('element-plus/es').ElFocusGroupCollection
   const ElIcon: typeof import('element-plus/es').ElIcon
-  const ElMessage: typeof import('element-plus/es').ElMessage
+  const ElLoading: typeof import('./config/element').ElLoading
+  const ElMessage: typeof import('./config/element').ElMessage
+  const ElMessageBox: typeof import('./config/element').ElMessageBox
+  const ElNotification: typeof import('./config/element').ElNotification
   const ElRovingFocusCollectionItem: typeof import('element-plus/es').ElRovingFocusCollectionItem
   const ElRovingFocusItem: typeof import('element-plus/es').ElRovingFocusItem
   const ElSelectMenu: typeof import('element-plus/es').ElSelectMenu
@@ -26,6 +29,7 @@ declare global {
   const articleStoreWithout: typeof import('./stores/use-article-store').articleStoreWithout
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
+  const baseURL: typeof import('./config/index').baseURL
   const caseCommentStore: typeof import('./composables/storage').caseCommentStore
   const casesDetailStore: typeof import('./composables/storage').casesDetailStore
   const casesListStore: typeof import('./composables/storage').casesListStore
@@ -74,6 +78,7 @@ declare global {
   const downloadByUrl: typeof import('./composables/download').downloadByUrl
   const eagerComputed: typeof import('@vueuse/core').eagerComputed
   const effectScope: typeof import('vue').effectScope
+  const element: typeof import('./config/element').default
   const emitter: typeof import('./composables/emitter').default
   const extendRef: typeof import('@vueuse/core').extendRef
   const faqCommentStore: typeof import('./composables/storage').faqCommentStore
@@ -101,11 +106,14 @@ declare global {
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
   const manualResetRef: typeof import('@vueuse/core').manualResetRef
   const markRaw: typeof import('vue').markRaw
+  const needSSR: typeof import('./config/index').needSSR
   const newsCommentStore: typeof import('./composables/storage').newsCommentStore
   const newsDetailStore: typeof import('./composables/storage').newsDetailStore
   const newsListStore: typeof import('./composables/storage').newsListStore
   const newsStoreWithout: typeof import('./stores/use-news-store').newsStoreWithout
   const nextTick: typeof import('vue').nextTick
+  const nl2br: typeof import('./utils/index').nl2br
+  const normalizeCookiePath: typeof import('./utils/index').normalizeCookiePath
   const onActivated: typeof import('vue').onActivated
   const onBeforeMount: typeof import('vue').onBeforeMount
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
@@ -161,8 +169,8 @@ declare global {
   const resolveRef: typeof import('@vueuse/core').resolveRef
   const resolveUnref: typeof import('@vueuse/core').resolveUnref
   const routerKey: typeof import('./composables/provide').routerKey
-  const scrollToComment: typeof import('./composables/index').scrollToComment
-  const scrollToNav: typeof import('./composables/index').scrollToNav
+  const scrollToComment: typeof import('./utils/index').scrollToComment
+  const scrollToNav: typeof import('./utils/index').scrollToNav
   const setClientInstanceProperties: typeof import('./composables/asyncData').setClientInstanceProperties
   const setMenuActive: typeof import('./composables/emitter').setMenuActive
   const setupPinia: typeof import('./stores/index').setupPinia
@@ -170,7 +178,7 @@ declare global {
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
   const showDialogKey: typeof import('./composables/provide').showDialogKey
-  const showMsg: typeof import('./composables/message').showMsg
+  const showMsg: typeof import('./utils/index').showMsg
   const storeToRefs: typeof import('pinia').storeToRefs
   const syncRef: typeof import('@vueuse/core').syncRef
   const syncRefs: typeof import('@vueuse/core').syncRefs
@@ -422,7 +430,10 @@ declare module 'vue' {
     readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
     readonly Delete: UnwrapRef<typeof import('./composables/alova')['Delete']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly ElMessage: UnwrapRef<typeof import('element-plus/es')['ElMessage']>
+    readonly ElLoading: UnwrapRef<typeof import('./config/element')['ElLoading']>
+    readonly ElMessage: UnwrapRef<typeof import('./config/element')['ElMessage']>
+    readonly ElMessageBox: UnwrapRef<typeof import('./config/element')['ElMessageBox']>
+    readonly ElNotification: UnwrapRef<typeof import('./config/element')['ElNotification']>
     readonly Get: UnwrapRef<typeof import('./composables/alova')['Get']>
     readonly Post: UnwrapRef<typeof import('./composables/alova')['Post']>
     readonly Put: UnwrapRef<typeof import('./composables/alova')['Put']>
@@ -433,6 +444,7 @@ declare module 'vue' {
     readonly articleStoreWithout: UnwrapRef<typeof import('./stores/use-article-store')['articleStoreWithout']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly baseURL: UnwrapRef<typeof import('./config/index')['baseURL']>
     readonly caseCommentStore: UnwrapRef<typeof import('./composables/storage')['caseCommentStore']>
     readonly casesDetailStore: UnwrapRef<typeof import('./composables/storage')['casesDetailStore']>
     readonly casesListStore: UnwrapRef<typeof import('./composables/storage')['casesListStore']>
@@ -481,6 +493,7 @@ declare module 'vue' {
     readonly downloadByUrl: UnwrapRef<typeof import('./composables/download')['downloadByUrl']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly element: UnwrapRef<typeof import('./config/element')['default']>
     readonly emitter: UnwrapRef<typeof import('./composables/emitter')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly faqCommentStore: UnwrapRef<typeof import('./composables/storage')['faqCommentStore']>
@@ -508,11 +521,14 @@ declare module 'vue' {
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly manualResetRef: UnwrapRef<typeof import('@vueuse/core')['manualResetRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly needSSR: UnwrapRef<typeof import('./config/index')['needSSR']>
     readonly newsCommentStore: UnwrapRef<typeof import('./composables/storage')['newsCommentStore']>
     readonly newsDetailStore: UnwrapRef<typeof import('./composables/storage')['newsDetailStore']>
     readonly newsListStore: UnwrapRef<typeof import('./composables/storage')['newsListStore']>
     readonly newsStoreWithout: UnwrapRef<typeof import('./stores/use-news-store')['newsStoreWithout']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly nl2br: UnwrapRef<typeof import('./utils/index')['nl2br']>
+    readonly normalizeCookiePath: UnwrapRef<typeof import('./utils/index')['normalizeCookiePath']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -567,8 +583,8 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly routerKey: UnwrapRef<typeof import('./composables/provide')['routerKey']>
-    readonly scrollToComment: UnwrapRef<typeof import('./composables/index')['scrollToComment']>
-    readonly scrollToNav: UnwrapRef<typeof import('./composables/index')['scrollToNav']>
+    readonly scrollToComment: UnwrapRef<typeof import('./utils/index')['scrollToComment']>
+    readonly scrollToNav: UnwrapRef<typeof import('./utils/index')['scrollToNav']>
     readonly setClientInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['setClientInstanceProperties']>
     readonly setMenuActive: UnwrapRef<typeof import('./composables/emitter')['setMenuActive']>
     readonly setupPinia: UnwrapRef<typeof import('./stores/index')['setupPinia']>
@@ -576,7 +592,7 @@ declare module 'vue' {
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly showDialogKey: UnwrapRef<typeof import('./composables/provide')['showDialogKey']>
-    readonly showMsg: UnwrapRef<typeof import('./composables/message')['showMsg']>
+    readonly showMsg: UnwrapRef<typeof import('./utils/index')['showMsg']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>

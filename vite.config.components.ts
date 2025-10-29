@@ -32,7 +32,15 @@ export default (): PluginOption[] => ([
             },
         ],
         dts: 'src/auto-imports.d.ts',
-        dirs: ['src/components', 'src/composables', 'src/stores', 'src/echarts'],
+        dirs: [
+            'src/components',
+            'src/**/components',
+            'src/composables',
+            'src/config',
+            'src/stores',
+            'src/service',
+            'src/**/utils',
+        ],
 
         resolvers: [
             ElementPlusResolver(),

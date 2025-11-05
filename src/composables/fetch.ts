@@ -2,7 +2,6 @@ import type { H3Event } from 'h3'
 import type { FetchOptions } from 'ofetch'
 import { isFormData, objToCookies } from '@lincy/utils'
 import { ofetch } from 'ofetch'
-import { baseURL } from '~/config'
 import { normalizeCookiePath } from '~/utils'
 
 /**

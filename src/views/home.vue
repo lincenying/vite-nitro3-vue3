@@ -83,7 +83,7 @@ import { appName } from '~/constants'
 defineOptions({
     name: 'RouterHome',
     asyncData(ctx) {
-        const { store, route, api } = ctx
+        const { store, route, api } = ctx!
         const {
             params: { category, tag },
         } = route

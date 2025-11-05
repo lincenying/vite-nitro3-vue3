@@ -27,8 +27,8 @@ EXPOSE 5123
 CMD ["node", "./.output/server/index.mjs"]
 
 # 第一次执行时, 如果node镜像拉不下来, 可以执行以下命令:
-# docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:22-alpine3.22
-# docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:22-alpine3.22 node:22-alpine
+# docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:22.21.1-alpine3.22
+# docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:22.21.1-alpine3.22 node:22-alpine
 # 构建镜像
 # docker build -t vite-nitro3-vue3:1.25.1029 -f ./Dockerfile .
 # 运行镜像

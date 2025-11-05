@@ -9,15 +9,10 @@ declare global {
   const $api: typeof import('./composables/fetch').$api
   const Delete: typeof import('./composables/alova').Delete
   const EffectScope: typeof import('vue').EffectScope
-  const ElButton: typeof import('element-plus/es').ElButton
-  const ElFocusGroupCollection: typeof import('element-plus/es').ElFocusGroupCollection
-  const ElIcon: typeof import('element-plus/es').ElIcon
   const ElLoading: typeof import('./config/element').ElLoading
   const ElMessage: typeof import('./config/element').ElMessage
   const ElMessageBox: typeof import('./config/element').ElMessageBox
   const ElNotification: typeof import('./config/element').ElNotification
-  const ElRovingFocusCollectionItem: typeof import('element-plus/es').ElRovingFocusCollectionItem
-  const ElRovingFocusItem: typeof import('element-plus/es').ElRovingFocusItem
   const ElSelectMenu: typeof import('element-plus/es').ElSelectMenu
   const Get: typeof import('./composables/alova').Get
   const Post: typeof import('./composables/alova').Post
@@ -29,7 +24,7 @@ declare global {
   const articleStoreWithout: typeof import('./stores/use-article-store').articleStoreWithout
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
-  const baseURL: typeof import('./config/index').baseURL
+  const baseURL: typeof import('./composables/index').baseURL
   const caseCommentStore: typeof import('./composables/storage').caseCommentStore
   const casesDetailStore: typeof import('./composables/storage').casesDetailStore
   const casesListStore: typeof import('./composables/storage').casesListStore
@@ -167,7 +162,6 @@ declare global {
   const resetSSRInstanceProperties: typeof import('./composables/asyncData').resetSSRInstanceProperties
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
-  const resolveUnref: typeof import('@vueuse/core').resolveUnref
   const routerKey: typeof import('./composables/provide').routerKey
   const scrollToComment: typeof import('./utils/index').scrollToComment
   const scrollToNav: typeof import('./utils/index').scrollToNav
@@ -178,7 +172,7 @@ declare global {
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
   const showDialogKey: typeof import('./composables/provide').showDialogKey
-  const showMsg: typeof import('./utils/index').showMsg
+  const showMsg: typeof import('./composables/message').showMsg
   const storeToRefs: typeof import('pinia').storeToRefs
   const syncRef: typeof import('@vueuse/core').syncRef
   const syncRefs: typeof import('@vueuse/core').syncRefs
@@ -444,7 +438,7 @@ declare module 'vue' {
     readonly articleStoreWithout: UnwrapRef<typeof import('./stores/use-article-store')['articleStoreWithout']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
-    readonly baseURL: UnwrapRef<typeof import('./config/index')['baseURL']>
+    readonly baseURL: UnwrapRef<typeof import('./composables/index')['baseURL']>
     readonly caseCommentStore: UnwrapRef<typeof import('./composables/storage')['caseCommentStore']>
     readonly casesDetailStore: UnwrapRef<typeof import('./composables/storage')['casesDetailStore']>
     readonly casesListStore: UnwrapRef<typeof import('./composables/storage')['casesListStore']>
@@ -592,7 +586,7 @@ declare module 'vue' {
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly showDialogKey: UnwrapRef<typeof import('./composables/provide')['showDialogKey']>
-    readonly showMsg: UnwrapRef<typeof import('./utils/index')['showMsg']>
+    readonly showMsg: UnwrapRef<typeof import('./composables/message')['showMsg']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>

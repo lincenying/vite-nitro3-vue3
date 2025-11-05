@@ -4,6 +4,8 @@ import ls from 'store2'
 /** 是否服务端渲染阶段 */
 export const isSSR = !!import.meta.env.SSR
 
+export const baseURL = import.meta.env.VITE_APP_API
+
 export function useGlobal() {
     const ins = getCurrentInstance()!
 

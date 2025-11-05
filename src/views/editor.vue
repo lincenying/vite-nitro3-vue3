@@ -6,19 +6,21 @@
         </div>
         <div flex="~ justify-center" my-24px lt-m1360="mx-24px">
             <div w-1294px flex="~ justify-between col">
-                <h5 text-16px hex-202935 mb-16px>Markdown编辑器</h5>
-                <div h-700px>
-                    <MdEditor v-model="text" @on-upload-img="onUploadImg" />
-                </div>
-                <h5 text-16px hex-202935 mt-24px mb-16px>Markdown内容预览</h5>
-                <div flex="~ justify-between" bg-hex-fff rounded="10px">
-                    <div flex-auto w-1px p-20px b-r="1px solid hex-ccc">
-                        <MdPreview :id="id" :model-value="text" />
+                <global-client-only>
+                    <h5 text-16px hex-202935 mb-16px>Markdown编辑器</h5>
+                    <div h-700px>
+                        <MdEditor v-model="text" :toolbars-exclude="['github']" @on-upload-img="onUploadImg" />
                     </div>
-                    <div w-200px flex-none>
-                        <MdCatalog :editor-id="id" :scroll-element="scrollElement" />
+                    <h5 text-16px hex-202935 mt-24px mb-16px>Markdown内容预览</h5>
+                    <div flex="~ justify-between" bg-hex-fff rounded="10px">
+                        <div flex-auto w-1px p-20px b-r="1px solid hex-ccc">
+                            <MdPreview :id="id" :model-value="text" />
+                        </div>
+                        <div w-200px flex-none>
+                            <MdCatalog :editor-id="id" :scroll-element="scrollElement" />
+                        </div>
                     </div>
-                </div>
+                </global-client-only>
             </div>
         </div>
     </div>

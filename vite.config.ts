@@ -44,6 +44,8 @@ export default defineConfig(({ mode }: ConfigEnv) => {
             ...Components(),
             nitro({
                 config: {
+                    imports: {
+                    },
                     output: {
                         dir: '.output',
                         serverDir: '.output/server',
@@ -68,7 +70,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         environments: {
             client: {
                 build: {
-                    rollupOptions: { },
+
                 },
             },
         },

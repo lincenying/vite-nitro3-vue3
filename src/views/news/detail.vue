@@ -94,8 +94,6 @@ const loading = ref(false)
 
 const commentStore = useCommentStore()
 
-const ctx = getCurrentInstance()
-console.log(ctx)
 async function initFunc() {
     loading.value = true
     await Promise.all([

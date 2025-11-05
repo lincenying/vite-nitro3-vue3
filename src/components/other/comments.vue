@@ -1,5 +1,5 @@
 <template>
-    <div ref="commnetBox" class="global-box" w="full" mb-24px p-24px bg="hex-fff" b-rd-6px>
+    <div ref="commnetBox" class="global-box" w-full mb-24px p-24px bg="hex-fff" b-rd-6px>
         <div class="global-box-title" m="0 b-24px" pl-16px text="1rem hex-202935" font-bold b-l="6px bolid hex-007bff">评论列表</div>
         <div class="global-box-content">
             <ul>

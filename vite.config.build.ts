@@ -7,7 +7,6 @@ const config: { build: BuildOptions } = {
         assetsInlineLimit: 4096,
         chunkSizeWarningLimit: 1000,
         terserOptions: {
-
             // @ts-ignore 1234
             compress: {
                 // 禁用变量名压缩
@@ -52,18 +51,6 @@ const config: { build: BuildOptions } = {
             external: [
                 /static\/.*?\.[cm]*js/,
                 'md-editor-v3',
-                'element-plus/es/components/focus-trap/style/css',
-                'element-plus/es/components/select-menu/style/css',
-                'element-plus/es/components/options/style/css',
-                'element-plus/es/components/roving-focus-item/style/css',
-                'element-plus/es/components/dropdown-item-impl/style/css',
-                'element-plus/es/components/roving-focus-collection-item/style/css',
-                'element-plus/es/components/collection/style/css',
-                'element-plus/es/components/slot/style/css',
-                'element-plus/es/components/only-child/style/css',
-                'element-plus/es/components/roving-focus-group/style/css',
-                'element-plus/es/components/focus-group-collection/style/css',
-                'element-plus/es/components/roving-focus-group-impl/style/css',
             ],
         },
     },

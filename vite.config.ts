@@ -16,7 +16,7 @@ import Components from './vite.config.components'
 import Css from './vite.config.css'
 import Macros from './vite.config.macros'
 
-export default defineConfig(({ mode }: ConfigEnv) => {
+export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
     // events.EventEmitter.defaultMaxListeners = 0
 
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
@@ -41,7 +41,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         css: Css,
         plugins: [
             ...Macros(),
-            ...Components(),
+            ...Components(!!isSsrBuild),
             nitro({
                 config: {
                     imports: {

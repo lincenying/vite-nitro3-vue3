@@ -4,7 +4,7 @@ import Icons from 'unplugin-icons/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 
-export default (): PluginOption[] => ([
+export default (isSsrBuild: boolean): PluginOption[] => ([
     /**
      * 按需自动导入API
      * @see https://github.com/antfu/unplugin-auto-import#readme
@@ -43,7 +43,11 @@ export default (): PluginOption[] => ([
         ],
 
         resolvers: [
-            ElementPlusResolver(),
+            ElementPlusResolver({
+                ssr: isSsrBuild,
+                exclude: /ElFocusTrap|ElSelectMenu|ElOptions/,
+                noStylesComponents: ['ElFocusTrap', 'ElSelectMenu', 'ElOptions'],
+            }),
         ],
         defaultExportByFilename: false,
         vueTemplate: true,
@@ -61,7 +65,11 @@ export default (): PluginOption[] => ([
         ],
         extensions: ['vue', 'tsx', 'jsx'],
         resolvers: [
-            ElementPlusResolver(),
+            ElementPlusResolver({
+                ssr: isSsrBuild,
+                exclude: /ElFocusTrap|ElSelectMenu|ElOptions/,
+                noStylesComponents: ['ElFocusTrap', 'ElSelectMenu', 'ElOptions'],
+            }),
         ],
         dts: 'src/components.d.ts',
         directoryAsNamespace: true,

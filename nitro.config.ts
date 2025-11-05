@@ -12,7 +12,7 @@ export default defineNitroConfig({
         '~server': path.join(__dirname, './server'),
         '@server': path.join(__dirname, './server'),
     },
-    srcDir: 'server',
+    serverDir: 'server',
     serveStatic: true,
     compatibilityDate: '2025-06-23',
     // 代理

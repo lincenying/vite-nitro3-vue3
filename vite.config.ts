@@ -22,6 +22,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
     const __dirname = path.dirname(fileURLToPath(import.meta.url))
     console.log(`当前编译环境: ${process.env.VITE_APP_ENV}`)
+    console.log(`当前是否SSR环境: ${isSsrBuild}`)
 
     return {
         base: '/',
@@ -42,24 +43,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
         plugins: [
             ...Macros(),
             ...Components(!!isSsrBuild),
-            nitro({
-                config: {
-                    imports: {
-                    },
-                    output: {
-                        dir: '.output',
-                        serverDir: '.output/server',
-                        publicDir: '.output/public',
-                    },
-                },
-                services: {
-                    ssr: {
-                        entry: !needSSR ? './src/server.ts' : './src/server.ssr.ts',
-                        // entry: './src/server.ts', // ===> spa
-                        // entry: './src/server.ssr.ts', // ===> ssr
-                    },
-                },
-            }),
+            nitro(),
             UnoCSS(),
             /**
              * 检查Vite插件的中间状态
@@ -67,10 +51,19 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
              */
             Inspect(),
         ],
+        nitro: {
+            imports: {
+            },
+            output: {
+                dir: '.output',
+                serverDir: '.output/server',
+                publicDir: '.output/public',
+            },
+        },
         environments: {
-            client: {
+            ssr: {
                 build: {
-
+                    rollupOptions: { input: !needSSR ? './src/server.ts' : './src/server.ssr.ts' },
                 },
             },
         },

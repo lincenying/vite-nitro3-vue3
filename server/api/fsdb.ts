@@ -1,5 +1,5 @@
 import { defineEventHandler } from 'h3'
-import { useStorage } from 'nitro/runtime'
+import { useStorage } from 'nitro/storage'
 
 export default defineEventHandler(async (_event) => {
     const dataStorage = useStorage('fsdb')

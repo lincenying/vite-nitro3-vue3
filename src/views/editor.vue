@@ -6,7 +6,7 @@
         </div>
         <div flex="~ justify-center" my-24px lt-m1360="mx-24px">
             <div w-1294px flex="~ justify-between col">
-                <global-client-only>
+                <global-client-only fallback-str="SSR端不渲染">
                     <h5 text-16px hex-202935 mb-16px>Markdown编辑器</h5>
                     <div h-700px>
                         <MdEditor v-model="text" :toolbars-exclude="['github']" @on-upload-img="onUploadImg" />

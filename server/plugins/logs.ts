@@ -1,7 +1,7 @@
 import type { NitroApp } from 'nitro/types'
-import { defineNitroPlugin } from 'nitro/runtime'
+import { definePlugin } from 'nitro'
 
-export default defineNitroPlugin((nitroApp: NitroApp) => {
+export default definePlugin((nitroApp: NitroApp) => {
     nitroApp.hooks.hook('request', async (event: any) => {
         console.log(`[${event.req.method}] ${event.req.url} ${event.req.body ? JSON.stringify(event.req.body) : ''}`)
     })

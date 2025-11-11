@@ -1,14 +1,14 @@
 import type { Article, InsertSucces } from '~server/types'
 import { UTC2Date } from '@lincy/utils'
 import { defineEventHandler, readBody } from 'h3'
-import { useStorage } from 'nitro/storage'
+import { useDatabase } from 'nitro/database'
 
 export default defineEventHandler(async (event) => {
     const db = useDatabase('sqlite3')
 
     const body = await readBody<Article>(event)
 
-    const { id, title, content, category } = body
+    const { id, title, content, category } = body!
 
     const date = UTC2Date('', 'yyyy-mm-dd hh:ii:ss')
 

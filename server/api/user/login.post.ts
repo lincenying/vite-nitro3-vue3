@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody<{ name: string, password: string }>(event)
 
     const user = users.find((user) => {
-        return body.name === user.name && body.password === user.password
+        return body?.name === user.name && body?.password === user.password
     })
     if (user) {
         setCookie(event, 'token', user.token, { maxAge: 60 * 60 * 24 * 7 })

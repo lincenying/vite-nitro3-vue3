@@ -1,5 +1,5 @@
 import { defineEventHandler } from 'h3'
-import { useStorage } from 'nitro/storage'
+import { useDatabase } from 'nitro/database'
 
 export default defineEventHandler(async () => {
     const db = useDatabase()

@@ -38,7 +38,7 @@ import { needSSR } from './config'
 import { createApp } from './main'
 
 import { routerBeforeResolve } from './router'
-import 'default-passive-events'
+// import 'default-passive-events'
 import '@/polyfill/toFixed'
 import 'uno.css'
 import 'md-editor-v3/lib/style.css'

@@ -1,9 +1,10 @@
+import type { H3Event } from 'h3'
 import type { CusRouteComponent } from './types/global.types'
-import { basename } from 'node:path'
 
+import { basename } from 'node:path'
 import { parseCookies } from '@lincy/utils'
 import { createHead, renderSSRHead } from '@unhead/vue/server'
-import { mockEvent, redirect } from 'h3'
+import { redirect } from 'h3'
 import { renderToString } from 'vue/server-renderer'
 import { resetSSRInstanceProperties } from './composables/asyncData'
 
@@ -14,11 +15,11 @@ function replaceHtmlTag(html: string): string {
     return html.replace(/<script(.*?)>/gi, '&lt;script$1&gt;').replace(/<\/script>/g, '&lt;/script&gt;')
 }
 
-export default async function render(url: string, template: string, context: { req: Request }) {
+export default async function render(url: string, template: string, context: { req: Request, event: H3Event }) {
     if (url.startsWith('/.well-known') || url.startsWith('/sm/')) {
-        return ''
+        return { html: '', cookies: '' }
     }
-    const H3Event = mockEvent(url)
+
     const cookies = parseCookies(context.req.headers.get('cookie') || '')
 
     const { app, router, store } = createApp()
@@ -35,7 +36,7 @@ export default async function render(url: string, template: string, context: { r
         return redirect('/login')
     }
 
-    const api = useApi(cookies, H3Event)
+    const api = useApi(cookies, context.event)
 
     console.log('%c[url] >> ', 'color: red', url)
     await router.push(url === '/' ? '/home' : url)
@@ -43,7 +44,7 @@ export default async function render(url: string, template: string, context: { r
     console.log('server router ready')
 
     if (router.currentRoute.value.matched.length === 0) {
-        return '404 Not Found'
+        return { html: '404 Not Found', cookies: '' }
     }
 
     const matchedComponents = router.currentRoute.value.matched.flatMap((record) => {
@@ -93,7 +94,10 @@ export default async function render(url: string, template: string, context: { r
         .replace('<!--head-tags-->', headTags)
         .replace(/(\n|\r\n)\s*<!--app-teleports-->/, teleports)
 
-    return html
+    return {
+        html,
+        cookies: context.event.res.headers.get('set-cookie'),
+    }
 }
 
 function renderPreloadLinks(modules: any[] = [], manifest: any) {

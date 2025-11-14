@@ -333,6 +333,7 @@ declare global {
   const useRouteParams: typeof import('@vueuse/router').useRouteParams
   const useRouteQuery: typeof import('@vueuse/router').useRouteQuery
   const useRouter: typeof import('vue-router').useRouter
+  const useSSR: typeof import('./config/index').useSSR
   const useSSRWidth: typeof import('@vueuse/core').useSSRWidth
   const useSaveScroll: typeof import('./composables/index').useSaveScroll
   const useScreenOrientation: typeof import('@vueuse/core').useScreenOrientation

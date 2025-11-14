@@ -10,7 +10,7 @@ import UnoCSS from 'unocss/vite'
 import { defineConfig, loadEnv } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 
-import { needSSR } from './src/config'
+import { useSSR } from './src/config'
 import Build from './vite.config.build'
 import Components from './vite.config.components'
 import Css from './vite.config.css'
@@ -64,7 +64,7 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
         environments: {
             ssr: {
                 build: {
-                    rollupOptions: { input: !needSSR ? './src/server.ts' : './src/server.ssr.ts' },
+                    rollupOptions: { input: !useSSR ? './src/server.ts' : './src/server.ssr.ts' },
                 },
             },
         },

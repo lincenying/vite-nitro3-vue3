@@ -28,18 +28,18 @@ export default {
         const H3Event = mockEvent(url)
 
         const render = await import('./main.server').then(m => m.default)
-        const renderSSR = await render(href, template, { req, event: H3Event })
+        const renderData = await render(href, template, { req, event: H3Event })
 
         let html: BodyInit | string = ''
         let cookies = ''
 
         // 处理跳转
-        if (isHTTPResponse(renderSSR)) {
-            html = renderSSR.body || ''
+        if (isHTTPResponse(renderData)) {
+            html = renderData.body ?? ''
         }
         else {
-            html = renderSSR.html
-            cookies = renderSSR.cookies || ''
+            html = renderData.html
+            cookies = renderData.cookies ?? ''
         }
 
         const headers = new Headers()

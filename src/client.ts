@@ -34,7 +34,7 @@ import { createHead } from '@unhead/vue/client'
 import globalPlugin from '@/plugin/global'
 
 import { getContext, setClientInstanceProperties } from './composables/asyncData'
-import { needSSR } from './config'
+import { useSSR } from './config'
 import { createApp } from './main'
 
 import { routerBeforeResolve } from './router'
@@ -62,7 +62,7 @@ const productStore = useProductStore()
 productStore.getCategory()
 
 router.isReady().then(() => {
-    if (needSSR) {
+    if (useSSR) {
         routerBeforeResolve(router)
     }
     app.use(head).use(globalPlugin).mount('#app')

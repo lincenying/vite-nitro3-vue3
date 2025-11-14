@@ -80,8 +80,12 @@ function emitterFn(type: CommentCategoryType) {
     initFn('change-data')
 }
 
-// emitter.on(`refresh-${props.type}-comment`, emitterFn)
-const unsubscribe = commentEvent[props.type].on(emitterFn)
+let unsubscribe: () => void
+
+onMounted(() => {
+    // emitter.on(`refresh-${props.type}-comment`, emitterFn)
+    unsubscribe = commentEvent[props.type].on(emitterFn)
+})
 
 onUnmounted(() => {
     // emitter.off(`refresh-${props.type}-comment`, emitterFn)

@@ -1,2 +1,2 @@
 /** 控制是否使用ssr */
-export const useSSR = true
+export const useSSR = false

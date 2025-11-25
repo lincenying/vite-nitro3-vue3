@@ -516,7 +516,6 @@ declare module 'vue' {
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly manualResetRef: UnwrapRef<typeof import('@vueuse/core')['manualResetRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
-    readonly needSSR: UnwrapRef<typeof import('./config/index')['needSSR']>
     readonly newsCommentStore: UnwrapRef<typeof import('./composables/storage')['newsCommentStore']>
     readonly newsDetailStore: UnwrapRef<typeof import('./composables/storage')['newsDetailStore']>
     readonly newsListStore: UnwrapRef<typeof import('./composables/storage')['newsListStore']>
@@ -748,6 +747,7 @@ declare module 'vue' {
     readonly useRouteParams: UnwrapRef<typeof import('@vueuse/router')['useRouteParams']>
     readonly useRouteQuery: UnwrapRef<typeof import('@vueuse/router')['useRouteQuery']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
+    readonly useSSR: UnwrapRef<typeof import('./config/index')['useSSR']>
     readonly useSSRWidth: UnwrapRef<typeof import('@vueuse/core')['useSSRWidth']>
     readonly useSaveScroll: UnwrapRef<typeof import('./composables/index')['useSaveScroll']>
     readonly useScreenOrientation: UnwrapRef<typeof import('@vueuse/core')['useScreenOrientation']>

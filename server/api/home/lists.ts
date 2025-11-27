@@ -6,8 +6,8 @@ import { imgUrl } from '~server/utils/img'
 
 export default defineEventHandler(async (event) => {
     let { page, pageSize } = getQuery<ListPageType>(event)
-    page = page || 1
-    pageSize = pageSize || 12
+    page ||= 1
+    pageSize ||= 12
     const template = {
         list: Array.from({ length: pageSize }, (_, index) => ({
             id: (page - 1) * pageSize + index + 1,

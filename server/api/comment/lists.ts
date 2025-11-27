@@ -5,8 +5,8 @@ import { getRandomNumber } from '~server/utils'
 
 export default defineEventHandler(async (event) => {
     let { page, pageSize } = getQuery<ListPageType>(event)
-    page = page || 1
-    pageSize = pageSize || 10
+    page ||= 1
+    pageSize ||= 10
     const template = {
         list: Array.from({ length: pageSize }, (_, index) => ({
             id: (page - 1) * pageSize + index + 1,

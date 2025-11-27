@@ -13,10 +13,11 @@ declare global {
   const ElMessage: typeof import('./config/element').ElMessage
   const ElMessageBox: typeof import('./config/element').ElMessageBox
   const ElNotification: typeof import('./config/element').ElNotification
-  const ElSelectMenu: typeof import('element-plus/es').ElSelectMenu
   const Get: typeof import('./composables/alova').Get
   const Post: typeof import('./composables/alova').Post
   const Put: typeof import('./composables/alova').Put
+  const _useAsyncData: typeof import('./composables/ssr-fetch')._useAsyncData
+  const _useFetch: typeof import('./composables/ssr-fetch')._useFetch
   const alova: typeof import('./composables/alova').default
   const articleCommentStore: typeof import('./composables/storage').articleCommentStore
   const articleDetailStore: typeof import('./composables/storage').articleDetailStore
@@ -88,8 +89,10 @@ declare global {
   const globalStoreWithout: typeof import('./stores/use-global-store').globalStoreWithout
   const h: typeof import('vue').h
   const ignorableWatch: typeof import('@vueuse/core').ignorableWatch
+  const initClientAsyncData: typeof import('./composables/ssr-fetch').initClientAsyncData
   const inject: typeof import('vue').inject
   const injectLocal: typeof import('@vueuse/core').injectLocal
+  const injectSSRData: typeof import('./composables/ssr-fetch').injectSSRData
   const isDefined: typeof import('@vueuse/core').isDefined
   const isProxy: typeof import('vue').isProxy
   const isReactive: typeof import('vue').isReactive
@@ -101,7 +104,6 @@ declare global {
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
   const manualResetRef: typeof import('@vueuse/core').manualResetRef
   const markRaw: typeof import('vue').markRaw
-  const needSSR: typeof import('./config/index').needSSR
   const newsCommentStore: typeof import('./composables/storage').newsCommentStore
   const newsDetailStore: typeof import('./composables/storage').newsDetailStore
   const newsListStore: typeof import('./composables/storage').newsListStore
@@ -432,6 +434,8 @@ declare module 'vue' {
     readonly Get: UnwrapRef<typeof import('./composables/alova')['Get']>
     readonly Post: UnwrapRef<typeof import('./composables/alova')['Post']>
     readonly Put: UnwrapRef<typeof import('./composables/alova')['Put']>
+    readonly _useAsyncData: UnwrapRef<typeof import('./composables/ssr-fetch')['_useAsyncData']>
+    readonly _useFetch: UnwrapRef<typeof import('./composables/ssr-fetch')['_useFetch']>
     readonly alova: UnwrapRef<typeof import('./composables/alova')['default']>
     readonly articleCommentStore: UnwrapRef<typeof import('./composables/storage')['articleCommentStore']>
     readonly articleDetailStore: UnwrapRef<typeof import('./composables/storage')['articleDetailStore']>
@@ -503,8 +507,10 @@ declare module 'vue' {
     readonly globalStoreWithout: UnwrapRef<typeof import('./stores/use-global-store')['globalStoreWithout']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly initClientAsyncData: UnwrapRef<typeof import('./composables/ssr-fetch')['initClientAsyncData']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectLocal: UnwrapRef<typeof import('@vueuse/core')['injectLocal']>
+    readonly injectSSRData: UnwrapRef<typeof import('./composables/ssr-fetch')['injectSSRData']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>

@@ -25,7 +25,9 @@ export default {
             template = fs.readFileSync(path.resolve(baseDir, '.output/public/template.html'), 'utf-8')
         }
 
-        const H3Event = mockEvent(url)
+        const H3Event = mockEvent(req)
+
+        ;(globalThis as any).__req = req
 
         const render = await import('./main.server').then(m => m.default)
         const renderData = await render(href, template, { req, event: H3Event })
@@ -40,6 +42,8 @@ export default {
         else {
             html = renderData.html
             cookies = renderData.cookies ?? ''
+
+            html = injectSSRData(html, req)
         }
 
         const headers = new Headers()

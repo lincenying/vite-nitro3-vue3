@@ -79,6 +79,7 @@ declare interface Window {
     __initialState__: Record<string, any>
     __globalState__: Record<string, any>
     __piniaState__: Record<string, any>
+    __ASYNC_DATA_CTX__?: Record<string, any>
 }
 
 declare interface ImportMeta {

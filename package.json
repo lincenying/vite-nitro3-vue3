@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@lincy/async-validation": "^1.4.0",
-    "@lincy/utils": "^0.7.2",
+    "@lincy/utils": "^0.7.3",
     "@tanstack/vue-query": "^5.92.0",
     "@tato30/vue-pdf": "^1.11.5",
     "@unhead/vue": "^2.0.19",

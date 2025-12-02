@@ -103,15 +103,12 @@ declare global {
   const isShallow: typeof import('vue').isShallow
   const loginMsgBox: typeof import('./composables/message').loginMsgBox
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
-  const manualResetRef: typeof import('@vueuse/core').manualResetRef
   const markRaw: typeof import('vue').markRaw
   const newsCommentStore: typeof import('./composables/storage').newsCommentStore
   const newsDetailStore: typeof import('./composables/storage').newsDetailStore
   const newsListStore: typeof import('./composables/storage').newsListStore
   const newsStoreWithout: typeof import('./stores/use-news-store').newsStoreWithout
   const nextTick: typeof import('vue').nextTick
-  const nl2br: typeof import('./utils/index').nl2br
-  const normalizeCookiePath: typeof import('./utils/index').normalizeCookiePath
   const onActivated: typeof import('vue').onActivated
   const onBeforeMount: typeof import('vue').onBeforeMount
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
@@ -166,8 +163,6 @@ declare global {
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
   const routerKey: typeof import('./composables/provide').routerKey
-  const scrollToComment: typeof import('./utils/index').scrollToComment
-  const scrollToNav: typeof import('./utils/index').scrollToNav
   const setClientInstanceProperties: typeof import('./composables/asyncData').setClientInstanceProperties
   const setMenuActive: typeof import('./composables/emitter').setMenuActive
   const setupPinia: typeof import('./stores/index').setupPinia
@@ -528,8 +523,6 @@ declare module 'vue' {
     readonly newsListStore: UnwrapRef<typeof import('./composables/storage')['newsListStore']>
     readonly newsStoreWithout: UnwrapRef<typeof import('./stores/use-news-store')['newsStoreWithout']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
-    readonly nl2br: UnwrapRef<typeof import('./utils/index')['nl2br']>
-    readonly normalizeCookiePath: UnwrapRef<typeof import('./utils/index')['normalizeCookiePath']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -584,8 +577,6 @@ declare module 'vue' {
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly routerKey: UnwrapRef<typeof import('./composables/provide')['routerKey']>
-    readonly scrollToComment: UnwrapRef<typeof import('./utils/index')['scrollToComment']>
-    readonly scrollToNav: UnwrapRef<typeof import('./utils/index')['scrollToNav']>
     readonly setClientInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['setClientInstanceProperties']>
     readonly setMenuActive: UnwrapRef<typeof import('./composables/emitter')['setMenuActive']>
     readonly setupPinia: UnwrapRef<typeof import('./stores/index')['setupPinia']>

@@ -38,8 +38,6 @@ export default (isSsrBuild: boolean): PluginOption[] => ([
             'src/composables',
             'src/config',
             'src/stores',
-            'src/service',
-            'src/**/utils',
         ],
 
         resolvers: [

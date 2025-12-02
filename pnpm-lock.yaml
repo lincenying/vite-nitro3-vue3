@@ -12,8 +12,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@lincy/utils':
-        specifier: ^0.7.2
-        version: 0.7.2
+        specifier: ^0.7.3
+        version: 0.7.3
       '@tanstack/vue-query':
         specifier: ^5.92.0
         version: 5.92.0(vue@3.5.25(typescript@5.9.3))
@@ -907,8 +907,8 @@ packages:
   '@lincy/unocss-base-config@2.4.0':
     resolution: {integrity: sha512-unOm7uy7RF+7uZqSenen4dgTpS39NhnyV8nk6YsfLYqmL0gQn7vS6dDRhDOQXKS+pnwI0zOKKee8WNTOYmEvvA==}
 
-  '@lincy/utils@0.7.2':
-    resolution: {integrity: sha512-b6TzBBKRyIV24ktYl71w4re+M72PD811MuwSsEJbGbFO1PmGuXGI3i6aEsF7qlfsIaTYURdDnVuoZDUFVJpCzg==}
+  '@lincy/utils@0.7.3':
+    resolution: {integrity: sha512-/y2e0LELiHsfnsSNPH+sLQT5BVeBsH7RWdo0b7Tj8ms+SFCj3OvODl5nnhRE/z762j7Vu9VlUlNL8OYZqtp5Ug==}
 
   '@marijn/find-cluster-break@1.0.2':
     resolution: {integrity: sha512-l0h88YhZFyKdXIFNfSWpyjStDjGHwZ/U7iobcK1cQQD8sejsONdQtTVU+1wVN1PBw40PiiHB1vA5S7VTfQiP9g==}
@@ -5555,7 +5555,7 @@ snapshots:
 
   '@lincy/async-validation@1.4.0':
     dependencies:
-      '@lincy/utils': 0.7.2
+      '@lincy/utils': 0.7.3
       async-validator: 4.2.5
 
   '@lincy/eslint-config@6.0.1(@unocss/eslint-plugin@66.5.10-beta.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.0.2(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
@@ -5625,7 +5625,7 @@ snapshots:
       - supports-color
       - vite
 
-  '@lincy/utils@0.7.2': {}
+  '@lincy/utils@0.7.3': {}
 
   '@marijn/find-cluster-break@1.0.2': {}
 

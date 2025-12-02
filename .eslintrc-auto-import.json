@@ -1,6 +1,7 @@
 {
   "globals": {
     "$api": true,
+    "$fetch": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,
@@ -113,7 +114,6 @@
     "isShallow": true,
     "loginMsgBox": true,
     "makeDestructurable": true,
-    "manualResetRef": true,
     "markRaw": true,
     "newsCommentStore": true,
     "newsDetailStore": true,

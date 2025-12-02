@@ -7,6 +7,7 @@
 export {}
 declare global {
   const $api: typeof import('./composables/fetch').$api
+  const $fetch: typeof import('./composables/fetch').$fetch
   const Delete: typeof import('./composables/alova').Delete
   const EffectScope: typeof import('vue').EffectScope
   const ElLoading: typeof import('./config/element').ElLoading
@@ -425,6 +426,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
+    readonly $fetch: UnwrapRef<typeof import('./composables/fetch')['$fetch']>
     readonly Delete: UnwrapRef<typeof import('./composables/alova')['Delete']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ElLoading: UnwrapRef<typeof import('./config/element')['ElLoading']>
@@ -520,7 +522,6 @@ declare module 'vue' {
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
     readonly loginMsgBox: UnwrapRef<typeof import('./composables/message')['loginMsgBox']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
-    readonly manualResetRef: UnwrapRef<typeof import('@vueuse/core')['manualResetRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly newsCommentStore: UnwrapRef<typeof import('./composables/storage')['newsCommentStore']>
     readonly newsDetailStore: UnwrapRef<typeof import('./composables/storage')['newsDetailStore']>

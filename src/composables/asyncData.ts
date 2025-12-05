@@ -101,7 +101,7 @@ export function deserializeState<T extends Record<string, unknown>>(state: strin
     try {
         // 如果是字符串类型，则尝试解析为JSON对象
         if (typeof state === 'string') {
-            return JSON.parse(state || '{}') as T
+            return destr<T>(state || '{}')
         }
         // 如果已经是对象类型，则直接返回
         return state

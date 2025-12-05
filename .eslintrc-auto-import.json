@@ -80,6 +80,7 @@
     "defineComponent": true,
     "defineStore": true,
     "deserializeState": true,
+    "destr": true,
     "downloadByBase64": true,
     "downloadByData": true,
     "downloadByOnlineUrl": true,

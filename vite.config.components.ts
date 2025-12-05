@@ -29,6 +29,7 @@ export default (isSsrBuild: boolean): PluginOption[] => ([
                 'vue-router': ['createRouter', 'createWebHashHistory'],
                 '@unhead/vue': ['createHead', 'useHead'],
                 '@vueuse/router': ['useRouteHash', 'useRouteParams', 'useRouteQuery'],
+                'destr': ['destr'],
             },
         ],
         dts: 'src/auto-imports.d.ts',

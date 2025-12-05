@@ -1,8 +1,10 @@
 import fs from 'node:fs'
-import polyfillLibrary from 'polyfill-library'
+// @ts-ignore 1234
+import UA from '@financial-times/polyfill-useragent-normaliser'
+import polyfillLibrary from '@mrhenry/polyfill-library'
 
-polyfillLibrary.getPolyfillString({
-    uaString: 'Chrome/63',
+const promiseString = polyfillLibrary.getPolyfillString({
+    ua: new UA('Chrome/63'),
     minify: true,
     features: {
         es2015: { flags: ['gated'] },
@@ -16,7 +18,10 @@ polyfillLibrary.getPolyfillString({
         fetch: { flags: ['gated'] },
     },
     excludes: ['AggregateError'],
-}).then((bundleString) => {
+    stream: false,
+}) as Promise<string>
+
+promiseString.then((bundleString) => {
     if (typeof bundleString === 'string') {
         fs.writeFileSync('./public/static/js/polyfill.js', bundleString)
     }

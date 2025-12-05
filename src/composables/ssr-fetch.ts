@@ -41,7 +41,7 @@ function createSSRContext() {
         // 从 HTML 中恢复数据到客户端缓存
         hydrate: (serializedData: string) => {
             try {
-                const data = JSON.parse(serializedData)
+                const data = destr<Record<string, any>>(serializedData)
                 for (const [key, value] of Object.entries(data)) {
                     ssrDataCache.set(key, value)
                 }

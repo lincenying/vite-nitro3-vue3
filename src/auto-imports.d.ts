@@ -69,6 +69,7 @@ declare global {
   const defineComponent: typeof import('vue').defineComponent
   const defineStore: typeof import('pinia').defineStore
   const deserializeState: typeof import('./composables/asyncData').deserializeState
+  const destr: typeof import('destr').destr
   const downloadByBase64: typeof import('./composables/download').downloadByBase64
   const downloadByData: typeof import('./composables/download').downloadByData
   const downloadByOnlineUrl: typeof import('./composables/download').downloadByOnlineUrl
@@ -483,6 +484,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly deserializeState: UnwrapRef<typeof import('./composables/asyncData')['deserializeState']>
+    readonly destr: UnwrapRef<typeof import('destr')['destr']>
     readonly downloadByBase64: UnwrapRef<typeof import('./composables/download')['downloadByBase64']>
     readonly downloadByData: UnwrapRef<typeof import('./composables/download')['downloadByData']>
     readonly downloadByOnlineUrl: UnwrapRef<typeof import('./composables/download')['downloadByOnlineUrl']>

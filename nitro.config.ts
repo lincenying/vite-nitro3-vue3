@@ -54,6 +54,14 @@ export default defineNitroConfig({
                 name: 'db',
             },
         },
+        archiveDB: {
+            connector: 'better-sqlite3',
+            options: {
+                // 相对项目根目录
+                path: './.archive/db.sqlite3',
+                name: 'db',
+            },
+        },
     },
     typescript: {
         tsConfig: {

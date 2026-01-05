@@ -42,6 +42,7 @@ import { routerBeforeResolve } from './router'
 import '@/polyfill/toFixed'
 import 'uno.css'
 import 'md-editor-v3/lib/style.css'
+import 'highlight.js/styles/atom-one-dark.css'
 
 import './assets/icon-font/icon-font.css'
 import './assets/scss/global/animate.min.css'

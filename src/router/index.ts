@@ -3,7 +3,6 @@ import type { Router, RouteRecordRaw } from 'vue-router'
 import type { CusRouteComponent } from '~/types/global.types'
 import ls from 'store2'
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
-import { useSSR } from '~/config'
 
 const views = import.meta.glob('../views/**/*.vue')
 

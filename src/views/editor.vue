@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import LinkAttr from 'markdown-it-link-attributes'
-import { config, MdCatalog, MdEditor, MdPreview } from 'md-editor-v3'
+import { MdCatalog, config as MdConfig, MdEditor, MdPreview } from 'md-editor-v3'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 
 defineOptions({
@@ -50,7 +50,7 @@ useHead({
     title: 'MMF小屋-编辑器',
 })
 
-config({
+MdConfig({
     markdownItPlugins(plugins) {
         return [
             ...plugins,
@@ -68,16 +68,6 @@ config({
                     },
                 },
             },
-            // {
-            //   type: 'anchor',
-            //   plugin: Anchor,
-            //   options: {
-            //     permalink: Anchor.permalink.headerLink(),
-            //     slugify(s: string) {
-            //       return s;
-            //     }
-            //   }
-            // }
         ]
     },
 })
@@ -93,12 +83,28 @@ Hello Editor!
 
 const html = ref('')
 
+interface TocType {
+    level: number
+    line: number
+    text: string
+    currentToken?: any[]
+    nextToken?: any[]
+}
+
+const toc = ref<TocType[]>([])
+
 function onHtmlChanged(payload: string) {
     html.value = payload
 }
 
-function onGetCatalog(payload: string[]) {
-    console.log(payload)
+function onGetCatalog(payload: TocType[]) {
+    toc.value = payload.map((item) => {
+        return {
+            level: item.level,
+            line: item.line,
+            text: item.text,
+        }
+    })
 }
 
 onMounted(() => {

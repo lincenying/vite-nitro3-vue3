@@ -18,10 +18,10 @@ strictPeerDependencies: false
 
 catalogs:
   dev:
-    '@financial-times/polyfill-useragent-normaliser': ^1.10.2
+    '@lincy/polyfill-useragent-normaliser': ^1.10.2
     '@lincy/unocss-base-config': ^2.4.1
     '@mrhenry/polyfill-library': ^5.2.1
-    '@unocss/eslint-plugin': ^66.5.12
+    '@unocss/eslint-plugin': ^66.6.0
     '@vitejs/plugin-vue': ^6.0.3
     '@vitejs/plugin-vue-jsx': ^5.1.3
     '@vue-macros/define-props': ^3.1.2
@@ -34,10 +34,10 @@ catalogs:
     nitro: ^3.0.1-alpha.1
     sass: ^1.97.2
     typescript: ~5.9.3
-    unocss: ^66.5.12
-    unplugin-auto-import: ^20.3.0
-    unplugin-icons: ^23.0.0
-    unplugin-vue-components: ^30.0.0
+    unocss: ^66.6.0
+    unplugin-auto-import: ^21.0.0
+    unplugin-icons: ^23.0.1
+    unplugin-vue-components: ^31.0.0
     vite: ^7.3.1
     vite-plugin-inspect: ^11.3.3
     vite-plugin-progress: ^0.0.7
@@ -49,7 +49,7 @@ catalogs:
     '@iconify-json/carbon': ^1.2.18
     '@iconify-json/fad': ^1.2.1
     '@iconify-json/svg-spinners': ^1.2.4
-    '@iconify-json/vscode-icons': ^1.2.39
+    '@iconify-json/vscode-icons': ^1.2.40
 
   lint:
     '@lincy/eslint-config': ^6.4.0
@@ -60,14 +60,14 @@ catalogs:
   prod:
     '@lincy/async-validation': ^1.4.0
     '@lincy/utils': ^0.7.3
-    '@tanstack/vue-query': ^5.92.6
+    '@tanstack/vue-query': ^5.92.8
     '@tato30/vue-pdf': ^1.11.5
     '@unhead/vue': ^2.1.2
-    '@unocss/reset': ^66.5.12
+    '@unocss/reset': ^66.6.0
     '@vueuse/core': ^14.1.0
     '@vueuse/router': ^14.1.0
     alova: ^3.4.1
-    better-sqlite3: ^12.6.0
+    better-sqlite3: ^12.6.2
     default-passive-events: ^4.0.0
     destr: ^2.0.5
     element-plus: ^2.13.1
@@ -81,13 +81,13 @@ catalogs:
     qs: ^6.14.1
     store2: ^2.14.4
     twig: ^1.17.1
-    vue: ^3.5.26
+    vue: ^3.5.27
     vue-router: ^4.6.4
 
   types:
     '@types/markdown-it-link-attributes': ^3.0.5
     '@types/mockjs': ^1.0.10
-    '@types/node': ^25.0.8
+    '@types/node': ^25.0.9
     '@types/qs': ^6.14.0
     '@types/twig': ^1.12.17
 

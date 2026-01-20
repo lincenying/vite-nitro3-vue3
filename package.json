@@ -46,12 +46,12 @@
   },
   "devDependencies": {
     "@element-plus/icons-vue": "catalog:icons",
-    "@financial-times/polyfill-useragent-normaliser": "catalog:dev",
     "@iconify-json/carbon": "catalog:icons",
     "@iconify-json/fad": "catalog:icons",
     "@iconify-json/svg-spinners": "catalog:icons",
     "@iconify-json/vscode-icons": "catalog:icons",
     "@lincy/eslint-config": "catalog:lint",
+    "@lincy/polyfill-useragent-normaliser": "catalog:dev",
     "@lincy/stylelint-config": "catalog:lint",
     "@lincy/unocss-base-config": "catalog:dev",
     "@mrhenry/polyfill-library": "catalog:dev",

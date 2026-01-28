@@ -1,5 +1,5 @@
 import { Buffer } from 'node:buffer'
-import fs from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { randomStr } from '@lincy/utils'
@@ -19,8 +19,8 @@ export default defineEventHandler(async (event) => {
     const file = files.get('file') as File
     const dir = '/public/upload'
     const dirPath = path.join(process.cwd(), dir)
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true })
+    if (!existsSync(dirPath)) {
+        mkdirSync(dirPath, { recursive: true })
     }
 
     const ext = path.extname(file.name).toLowerCase()
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     const filepath = path.join(dirPath, newFileName)
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    fs.writeFileSync(filepath, buffer)
+    writeFileSync(filepath, buffer)
 
     return {
         code: 200,

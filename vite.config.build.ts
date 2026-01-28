@@ -52,6 +52,18 @@ const config: { build: BuildOptions } = {
                 /static\/.*?\.[cm]*js/,
                 'md-editor-v3',
             ],
+            onLog(level, log, handler) {
+                if (log.code === 'UNUSED_EXTERNAL_IMPORT')
+                    return
+                handler(level, log)
+            },
+            onwarn(warning, warn) {
+                // 忽略特定的未使用导入警告
+                if (warning.code === 'UNUSED_EXTERNAL_IMPORT' || warning.code === 'UNUSED_IMPORT') {
+                    return
+                }
+                warn(warning)
+            },
         },
     },
 }

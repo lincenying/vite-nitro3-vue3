@@ -30,21 +30,21 @@ const config: { build: BuildOptions } = {
                 manualChunks(id: string) {
                     if (id.includes('node_modules')) {
                         if (id.includes('element-plus')) {
-                            return 'element-plus'
-                        }
-                        if (id.includes('lucide-vue-next') || id.includes('md-editor-v3')) {
-                            return 'md-editor-v3'
+                            return '1-element-plus'
                         }
                         if (id.includes('markdown-it') || id.includes('codemirror')) {
-                            return 'markdown-it'
+                            return '2-markdown-it'
                         }
                         if (id.includes('vue-pdf')) {
-                            return 'vue-pdf'
+                            return '3-vue-pdf'
                         }
-                        return 'vendor'
+                        return '0-vendor'
                     }
                     if (id.includes('__uno.css')) {
-                        return 'unocss'
+                        return '4-unocss'
+                    }
+                    if (id.includes('.scss') || id.includes('.css')) {
+                        return '5-main-style'
                     }
                 },
             },

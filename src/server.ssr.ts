@@ -22,7 +22,16 @@ export default {
             // template = template.replace('<!--vite-client-->', '<script type="module" src="/@vite/client"></script>')
         }
         else {
-            template = fs.readFileSync(path.resolve(baseDir, '.output/public/template.html'), 'utf-8')
+            let templatePath = path.resolve(baseDir, '.output/public/template.html')
+            fs.access(templatePath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    templatePath = path.resolve(baseDir, 'public/template.html')
+                    template = fs.readFileSync(templatePath, 'utf-8')
+                }
+                else {
+                    template = fs.readFileSync(templatePath, 'utf-8')
+                }
+            })
         }
 
         const H3Event = mockEvent(req)

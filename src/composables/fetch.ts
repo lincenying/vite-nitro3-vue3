@@ -16,7 +16,7 @@ const pendingRequest = new Map<string, AbortController>()
     delete<T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
  * ```
  */
-export const useApi: (cookies?: Record<string, string | number | boolean>, H3Event?: H3Event) => ApiType = (cookies, H3Event) => {
+export const useApi: (cookies?: Record<string, string | number | boolean>, H3Event?: H3Event, needSignal?: boolean) => ApiType = (cookies, H3Event, needSignal = false) => {
     const apiFetch = ofetch.create({
         baseURL,
         headers: {
@@ -64,11 +64,14 @@ export const useApi: (cookies?: Record<string, string | number | boolean>, H3Eve
         },
         async fetch(url, method, data, options?: FetchOptions) {
             console.log('%c[request-url] >> ', 'color: red', baseURL + url, data || {})
-            this.abortKey = this.generateRequestKey({ url, method, data })
-            const controller = new AbortController()
-            const signal = controller.signal
+            let signal: AbortSignal | undefined
+            if (needSignal) {
+                this.abortKey = this.generateRequestKey({ url, method, data })
+                const controller = new AbortController()
+                signal = controller.signal
 
-            pendingRequest.set(this.abortKey, controller)
+                pendingRequest.set(this.abortKey, controller)
+            }
 
             const response = await apiFetch(url, {
                 method,
@@ -120,4 +123,4 @@ if (typeof window !== 'undefined') {
     window.$$api = useApi()
 }
 export const $api = useApi()
-export const $fetch = useApi()
+export const $fetch = useApi(undefined, undefined, true)

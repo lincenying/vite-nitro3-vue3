@@ -11,6 +11,8 @@ shamefullyHoist: true
 # 在执行脚本时使用POSIX shell模拟器替代系统原生shell
 shellEmulator: true
 
+trustPolicy: no-downgrade
+
 # 用于控制是否严格检查对等依赖（peer dependencies）的版本一致性。
 # 当设置为 true 时，pnpm 会强制安装指定版本的对等依赖；
 # 设置为 false 时，会忽略版本不一致的警告
@@ -42,30 +44,30 @@ catalogs:
     vite-plugin-inspect: ^11.3.3
     vite-plugin-progress: ^0.0.7
     vue-macros: ^3.1.2
-    vue-tsc: ^3.2.4
+    vue-tsc: ^3.2.5
 
   icons:
     '@element-plus/icons-vue': ^2.3.2
     '@iconify-json/carbon': ^1.2.18
     '@iconify-json/fad': ^1.2.1
     '@iconify-json/svg-spinners': ^1.2.4
-    '@iconify-json/vscode-icons': ^1.2.40
+    '@iconify-json/vscode-icons': ^1.2.44
 
   lint:
-    '@lincy/eslint-config': ^6.4.0
+    '@lincy/eslint-config': ^6.5.0
     '@lincy/stylelint-config': ^2.2.1
-    eslint: ^9.39.2
-    eslint-plugin-format: ^1.4.0
+    eslint: ^10.0.2
+    eslint-plugin-format: ^2.0.1
 
   prod:
     '@lincy/async-validation': ^1.4.0
     '@lincy/utils': ^0.7.3
     '@tanstack/vue-query': ^5.92.9
     '@tato30/vue-pdf': ^2.0.0
-    '@unhead/vue': ^2.1.4
+    '@unhead/vue': ^2.1.6
     '@unocss/reset': ^66.6.0
-    '@vueuse/core': ^14.2.0
-    '@vueuse/router': ^14.2.0
+    '@vueuse/core': ^14.2.1
+    '@vueuse/router': ^14.2.1
     alova: ^3.5.0
     better-sqlite3: ^12.6.2
     default-passive-events: ^4.0.0
@@ -78,16 +80,16 @@ catalogs:
     mitt: ^3.0.1
     ofetch: ^1.5.1
     pinia: ^3.0.4
-    qs: ^6.14.1
+    qs: ^6.15.0
     store2: ^2.14.4
     twig: ^1.17.1
-    vue: ^3.5.28
-    vue-router: ^5.0.2
+    vue: ^3.5.29
+    vue-router: ^5.0.3
 
   types:
     '@types/markdown-it-link-attributes': ^3.0.5
     '@types/mockjs': ^1.0.10
-    '@types/node': ^25.2.2
+    '@types/node': ^25.3.0
     '@types/qs': ^6.14.0
     '@types/twig': ^1.12.17
 

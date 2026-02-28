@@ -73,7 +73,7 @@
     "jiti": "catalog:dev",
     "mockjs": "catalog:dev",
     "nitro": "catalog:dev",
-    "sass": "catalog:dev",
+    "sass-embedded": "catalog:dev",
     "typescript": "catalog:dev",
     "unocss": "catalog:dev",
     "unplugin-auto-import": "catalog:dev",

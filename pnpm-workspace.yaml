@@ -16,6 +16,7 @@ trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@6.3.1
   - chokidar@4.0.3
+  - cached-factory@0.1.0
 
 # 用于控制是否严格检查对等依赖（peer dependencies）的版本一致性。
 # 当设置为 true 时，pnpm 会强制安装指定版本的对等依赖；
@@ -39,6 +40,7 @@ catalogs:
     mockjs: ^1.1.0
     nitro: ^3.0.1-alpha.2
     sass-embedded: ^1.97.3
+    stylelint: ^17.4.0
     typescript: ~5.9.3
     unocss: ^66.6.2
     unplugin-auto-import: ^21.0.0
@@ -58,8 +60,8 @@ catalogs:
     '@iconify-json/vscode-icons': ^1.2.44
 
   lint:
-    '@lincy/eslint-config': ^6.5.0
-    '@lincy/stylelint-config': ^2.2.1
+    '@lincy/eslint-config': ^6.5.1
+    '@lincy/stylelint-config': ^2.2.2
     eslint: ^10.0.2
     eslint-plugin-format: ^2.0.1
 
@@ -72,11 +74,11 @@ catalogs:
     '@unocss/reset': ^66.6.2
     '@vueuse/core': ^14.2.1
     '@vueuse/router': ^14.2.1
-    alova: ^3.5.0
+    alova: ^3.5.1
     better-sqlite3: ^12.6.2
     default-passive-events: ^4.0.0
     destr: ^2.0.5
-    element-plus: ^2.13.2
+    element-plus: ^2.13.3
     highlight.js: ^11.11.1
     lodash: ^4.17.23
     markdown-it-link-attributes: ^4.0.1
@@ -93,7 +95,7 @@ catalogs:
   types:
     '@types/markdown-it-link-attributes': ^3.0.5
     '@types/mockjs': ^1.0.10
-    '@types/node': ^25.3.2
+    '@types/node': ^25.3.3
     '@types/qs': ^6.14.0
     '@types/twig': ^1.12.17
 

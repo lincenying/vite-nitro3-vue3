@@ -40,6 +40,7 @@
     "pinia": "catalog:prod",
     "qs": "catalog:prod",
     "store2": "catalog:prod",
+    "stylelint": "catalog:dev",
     "twig": "catalog:prod",
     "vue": "catalog:prod",
     "vue-router": "catalog:prod"

@@ -201,8 +201,9 @@ getDetail()
 
 ## 开发环境配置proxy跨域
 
-```
-{
+```ts
+export default {
+    // ...
     server: {
         port: 7771,
         proxy: {
@@ -213,6 +214,7 @@ getDetail()
             },
         },
     },
+    // ...
 }
 ```
 

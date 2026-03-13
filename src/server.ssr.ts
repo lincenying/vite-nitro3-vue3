@@ -26,11 +26,8 @@ export default {
             fs.access(templatePath, fs.constants.F_OK, (err) => {
                 if (err) {
                     templatePath = path.resolve(baseDir, 'public/template.html')
-                    template = fs.readFileSync(templatePath, 'utf-8')
                 }
-                else {
-                    template = fs.readFileSync(templatePath, 'utf-8')
-                }
+                template = fs.readFileSync(templatePath, 'utf-8')
             })
         }
 

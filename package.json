@@ -68,6 +68,7 @@
     "@vue-macros/define-props-refs": "catalog:dev",
     "@vue-macros/reactivity-transform": "catalog:dev",
     "@vue-macros/volar": "catalog:dev",
+    "baseline-browser-mapping": "catalog:dev",
     "cross-env": "catalog:dev",
     "eslint": "catalog:lint",
     "eslint-plugin-format": "catalog:lint",

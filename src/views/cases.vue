@@ -110,6 +110,7 @@ const { data: posts, pending, error } = await _useAsyncData({
     handler: async () => {
         return await $api.get<ProductCategory[]>('/home/category?category=1')
     },
+    server: false,
 })
 
 watch([posts, pending, error], () => {

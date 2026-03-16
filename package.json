@@ -40,7 +40,6 @@
     "pinia": "catalog:prod",
     "qs": "catalog:prod",
     "store2": "catalog:prod",
-    "stylelint": "catalog:dev",
     "twig": "catalog:prod",
     "vue": "catalog:prod",
     "vue-router": "catalog:prod"
@@ -76,6 +75,7 @@
     "mockjs": "catalog:dev",
     "nitro": "catalog:dev",
     "sass-embedded": "catalog:dev",
+    "stylelint": "catalog:lint",
     "typescript": "catalog:dev",
     "unocss": "catalog:dev",
     "unplugin-auto-import": "catalog:dev",

@@ -22,7 +22,7 @@ ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=5123 \
     NITRO_APP_VERSION=latest \
-    NITRO_ENV_HOST_API_URL=https://php.mmxiaowu.com
+    NITRO_HOST_API_URL=https://php.mmxiaowu.com
 EXPOSE 5123
 CMD ["node", "./.output/server/index.mjs"]
 

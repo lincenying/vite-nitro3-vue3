@@ -58,7 +58,6 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
                 serverDir: '.output/server',
                 publicDir: '.output/public',
             },
-
         },
         environments: {
             ssr: {

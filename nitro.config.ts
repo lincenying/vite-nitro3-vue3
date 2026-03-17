@@ -3,7 +3,7 @@ import process from 'node:process'
 
 import { defineNitroConfig } from 'nitro/config'
 
-const proxyDomain = process.env.NITRO_ENV_HOST_API_URL || 'https://php.mmxiaowu.com'
+const proxyDomain = process.env.NITRO_HOST_API_URL || 'https://php.mmxiaowu.com'
 
 export default defineNitroConfig({
     alias: {

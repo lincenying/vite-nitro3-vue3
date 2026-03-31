@@ -147,7 +147,7 @@ function renderPreloadLink(file: string) {
         return ` <link rel="preload" href="${file}" as="image" type="image/png">`
     }
     else {
-    // TODO
+        // TODO
         return ''
     }
 }

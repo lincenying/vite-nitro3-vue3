@@ -1,13 +1,16 @@
 import type { Article } from '~server/types'
+import { desc } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
+import { mapArticleRow } from '~server/db/maps'
+import { article } from '~server/db/schema'
 
 export default defineEventHandler(async (_event) => {
-    const db = useDatabase('sqlite3')
+    const db = useSqlite3Drizzle()
 
-    // Query for users
-    // const { rows } = await db.sql<QueryResult>`SELECT * FROM users`
-    const data = await db.prepare(`SELECT * FROM article order by views desc LIMIT 10 OFFSET 0`).all() as Article[]
+    const rows = db.select().from(article).orderBy(desc(article.views)).limit(10).offset(0).all()
+    const data: Article[] = rows.map(mapArticleRow)
 
     return {
         code: 200,

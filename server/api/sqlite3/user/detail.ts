@@ -1,6 +1,10 @@
 import type { User } from '~server/types'
+import { eq } from 'drizzle-orm'
 import { defineEventHandler, getQuery } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
+import { mapUserRow } from '~server/db/maps'
+import { users } from '~server/db/schema'
 
 export default defineEventHandler(async (event) => {
     const id = getQuery<{ id: number }>(event).id
@@ -12,12 +16,10 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    const db = useDatabase('sqlite3')
+    const db = useSqlite3Drizzle()
 
-    // Query for users
-    // const { rows } = await db.sql<QueryResult>`SELECT * FROM users WHERE id = ${id}`
-
-    const data = await db.prepare(`SELECT * FROM users WHERE id = ?`).get(id) as User
+    const row = db.select().from(users).where(eq(users.id, Number(id))).get()
+    const data: User | undefined = row ? mapUserRow(row) : undefined
 
     return {
         code: 200,

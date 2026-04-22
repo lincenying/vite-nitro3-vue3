@@ -79,6 +79,7 @@ catalogs:
     better-sqlite3: ^12.9.0
     default-passive-events: ^4.0.0
     destr: ^2.0.5
+    drizzle-orm: ^0.45.1
     element-plus: ^2.13.7
     highlight.js: ^11.11.1
     lodash: ^4.18.1

@@ -1,6 +1,9 @@
 import type { ArchiveType } from '~server/types'
+import { eq } from 'drizzle-orm'
 import { defineEventHandler, getQuery } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useArchiveDrizzle } from '~server/db/client'
+import { archive } from '~server/db/schema'
 
 export default defineEventHandler(async (event) => {
     const id = getQuery<{ id: number }>(event).id
@@ -12,12 +15,9 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    const db = useDatabase('archiveDB')
+    const db = useArchiveDrizzle()
 
-    // Query for users
-    // const { rows } = await db.sql<QueryResult>`SELECT * FROM users WHERE id = ${id}`
-
-    const data = await db.prepare(`SELECT * FROM archive WHERE c_id = ?`).get(id) as ArchiveType
+    const data = db.select().from(archive).where(eq(archive.c_id, Number(id))).get() as ArchiveType | undefined
 
     return {
         code: 200,

@@ -1,9 +1,13 @@
 import type { InsertSucces, User } from '~server/types'
+import { eq } from 'drizzle-orm'
 import { defineEventHandler, readBody } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
+import { mapUserRow } from '~server/db/maps'
+import { users } from '~server/db/schema'
 
 export default defineEventHandler(async (event) => {
-    const db = useDatabase('sqlite3')
+    const db = useSqlite3Drizzle()
 
     const body = await readBody<User>(event)
 
@@ -17,10 +21,22 @@ export default defineEventHandler(async (event) => {
     }
 
     const userId = String(Math.round(Math.random() * 10_000))
-    // const data = await db.sql`INSERT INTO users VALUES (null, ${userId}, ${firstName}, ${lastName}, ${email})`
-    const result = await db.prepare('INSERT INTO users VALUES (null, ?, ?, ?, ?)').run(userId, firstName, lastName, email) as InsertSucces
 
-    const data = await db.prepare('select * from users where id = ?').get(result.lastInsertRowid) as User
+    const run = db.insert(users).values({
+        userid: userId,
+        firstName,
+        lastName,
+        email,
+    }).run()
+
+    const result: InsertSucces = {
+        success: run.changes > 0,
+        lastInsertRowid: Number(run.lastInsertRowid),
+        changes: run.changes,
+    }
+
+    const row = db.select().from(users).where(eq(users.id, Number(run.lastInsertRowid))).get()
+    const data = row ? mapUserRow(row) : undefined
 
     return {
         code: 200,

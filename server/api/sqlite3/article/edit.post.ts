@@ -1,10 +1,13 @@
 import type { Article, InsertSucces } from '~server/types'
 import { UTC2Date } from '@lincy/utils'
+import { eq } from 'drizzle-orm'
 import { defineEventHandler, readBody } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
+import { article } from '~server/db/schema'
 
 export default defineEventHandler(async (event) => {
-    const db = useDatabase('sqlite3')
+    const db = useSqlite3Drizzle()
 
     const body = await readBody<Article>(event)
 
@@ -12,19 +15,29 @@ export default defineEventHandler(async (event) => {
 
     const date = UTC2Date('', 'yyyy-mm-dd hh:ii:ss')
 
-    if (!title || !content || !category) {
+    if (id == null || id === '' || !title || !content || !category) {
         return {
             code: 400,
             message: 'Invalid request',
         }
     }
 
-    // id title content author category views date
-    const result = await db.prepare('UPDATE article SET title = ?, content = ?, category = ?, date = ? where id = ?').run(title, content, category, date, id) as InsertSucces
+    const run = db.update(article).set({
+        title,
+        content,
+        category,
+        date,
+    }).where(eq(article.id, Number(id))).run()
+
+    const data: InsertSucces = {
+        success: run.changes > 0,
+        lastInsertRowid: Number(run.lastInsertRowid),
+        changes: run.changes,
+    }
 
     return {
         code: 200,
         message: 'API is working!',
-        data: result,
+        data,
     }
 })

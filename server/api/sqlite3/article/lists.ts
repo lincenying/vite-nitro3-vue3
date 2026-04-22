@@ -1,32 +1,35 @@
-import type { Article, ListPageType } from '~server/types'
+import type { ListPageType } from '~server/types'
+import { count, desc } from 'drizzle-orm'
 import { defineEventHandler, getQuery } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
+import { mapArticleRow } from '~server/db/maps'
+import { article } from '~server/db/schema'
 
 export default defineEventHandler(async (event) => {
-    const db = useDatabase('sqlite3')
+    const db = useSqlite3Drizzle()
 
-    let { page, pageSize } = getQuery<ListPageType>(event)
-    page ||= 1
-    pageSize ||= 12
+    const q = getQuery<ListPageType>(event)
+    const page = Number(q.page) > 0 ? Number(q.page) : 1
+    const pageSize = Number(q.pageSize) > 0 ? Number(q.pageSize) : 12
 
     const offset = (page - 1) * pageSize
 
-    // Query for users
-    // const { rows } = await db.sql<QueryResult>`SELECT * FROM users`
-    const data = await db.prepare(`SELECT * FROM article order by id desc LIMIT ${pageSize} OFFSET ${offset}`).all() as Article[]
+    const rows = db.select().from(article).orderBy(desc(article.id)).limit(pageSize).offset(offset).all()
+    const data = rows.map(mapArticleRow)
 
-    const total = await db.prepare(`SELECT COUNT(*) as total FROM article`).get() as { total: number }
+    const [{ total }] = db.select({ total: count() }).from(article).all()
 
-    const hasNext = total.total > offset + pageSize ? 1 : 0
+    const hasNext = total > offset + pageSize ? 1 : 0
     const hasprev = page > 1 ? 1 : 0
-    const totalPage = Math.ceil(total.total / pageSize)
+    const totalPage = Math.ceil(total / pageSize)
 
     return {
         code: 200,
         message: 'API is working!',
         data: {
             list: data,
-            total: total.total,
+            total,
             currPage: page,
             pageSize,
             hasNext,

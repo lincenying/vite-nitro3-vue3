@@ -23,12 +23,10 @@ export default {
         }
         else {
             let templatePath = path.resolve(baseDir, '.output/public/template.html')
-            fs.access(templatePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    templatePath = path.resolve(baseDir, 'public/template.html')
-                }
-                template = fs.readFileSync(templatePath, 'utf-8')
-            })
+            if (!fs.existsSync(templatePath)) {
+                templatePath = path.resolve(baseDir, 'public/template.html')
+            }
+            template = fs.readFileSync(templatePath, 'utf-8')
         }
 
         const H3Event = mockEvent(req)

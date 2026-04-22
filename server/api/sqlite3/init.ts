@@ -1,23 +1,22 @@
+import { sql } from 'drizzle-orm'
 import { defineEventHandler } from 'h3'
-import { useDatabase } from 'nitro/database'
+
+import { useSqlite3Drizzle } from '~server/db/client'
 
 export default defineEventHandler(async () => {
-    const db = useDatabase('sqlite3')
-
-    const sqlArray = [
-        'DROP TABLE IF EXISTS users',
-    ]
-    sqlArray.push(`
+    const db = useSqlite3Drizzle()
+    const statements = [
+        sql.raw('DROP TABLE IF EXISTS users'),
+        sql.raw(`
         CREATE TABLE IF NOT EXISTS users (
             "id" INTEGER PRIMARY KEY AUTOINCREMENT,
             "userid" VARCHAR(10),
             "firstName" VARCHAR(50),
             "lastName" VARCHAR(50),
             "email" VARCHAR(50)
-        )`,
-    )
-    sqlArray.push(`DROP TABLE IF EXISTS article`)
-    sqlArray.push(`
+        )`),
+        sql.raw('DROP TABLE IF EXISTS article'),
+        sql.raw(`
         CREATE TABLE IF NOT EXISTS article (
             "id" INTEGER PRIMARY KEY AUTOINCREMENT,
             "title" VARCHAR(100),
@@ -26,13 +25,17 @@ export default defineEventHandler(async () => {
             "category" VARCHAR(20),
             "views" INTEGER,
             "date" VARCHAR(20)
-        )`,
-    )
-    const result: { [key: string]: any }[] = []
+        )`),
+    ]
 
-    for (const sql of sqlArray) {
-        const data = await db.prepare(sql).run()
-        result.push(data)
+    const result: { success: boolean, changes: number, lastInsertRowid: number }[] = []
+    for (const statement of statements) {
+        const r = db.run(statement)
+        result.push({
+            success: true,
+            changes: r.changes,
+            lastInsertRowid: Number(r.lastInsertRowid),
+        })
     }
 
     return {

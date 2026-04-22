@@ -1,0 +1,46 @@
+---
+description: 指定前端开发技术及规范
+globs: */server/**/*.*
+alwaysApply: false
+---
+
+# 后端开发规范 - Nitro3 + Bun + Drizzle ORM
+
+## 技术栈
+- 运行时：Bun
+- 框架：Nitro3
+- 数据库：开发 BunSQLite / 生产 PostgreSQL
+- ORM：Drizzle ORM
+- 认证：JWT + Cookie
+- API 风格：RESTful
+
+## 目录规范
+- backend/
+  - api/            api文件夹
+  - db/             Drizzle  schema、迁移、数据库实例
+  - routes/         路由
+  - plugins/        插件
+  - utils/          工具函数
+  - types/          TS 类型定义
+  - middlewares/    中间件（JWT 校验、权限等）
+
+## 代码规范
+1. 所有接口必须定义完整 TS 类型
+2. 使用 Nitro 内置的 defineEventHandler、readBody 等 API
+3. 统一响应格式：{ success: boolean, data?: any, message?: string, code?: number }
+4. 错误统一捕获并返回友好信息
+5. 数据库操作全部通过 Drizzle ORM，禁止裸写 SQL
+6. JWT 密钥、数据库配置放入环境变量，禁止硬编码
+7. 中间件统一处理身份验证、跨域、异常捕获
+
+## Drizzle ORM 规范
+1. schema 按模块拆分（user、role、order 等）
+2. 表名使用 snake_case
+3. 字段添加注释、默认值、非空约束
+4. 开发环境使用 sqlite，生产环境自动切换 postgresql
+
+## 身份验证
+1. 登录成功签发 JWT 并写入 httpOnly Cookie
+2. 鉴权中间件验证 token 有效性
+3. 路由权限按角色控制
+

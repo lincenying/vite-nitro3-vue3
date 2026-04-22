@@ -3,7 +3,7 @@ import type { CusRouteComponent } from './types/global.types'
 
 import { basename } from 'node:path'
 import { parseCookies } from '@lincy/utils'
-import { createHead, renderSSRHead } from '@unhead/vue/server'
+import { createHead } from '@unhead/vue/server'
 import { redirect } from 'h3'
 import { renderToString } from 'vue/server-renderer'
 import { resetSSRInstanceProperties } from './composables/asyncData'
@@ -14,6 +14,8 @@ import { createApp } from './main'
 function replaceHtmlTag(html: string): string {
     return html.replace(/<script(.*?)>/gi, '&lt;script$1&gt;').replace(/<\/script>/g, '&lt;/script&gt;')
 }
+
+const teleportsRegex = /(\n|\r\n)\s*<!--app-teleports-->/
 
 export default async function render(url: string, template: string, context: { req: Request, event: H3Event }) {
     if (url.startsWith('/.well-known') || url.startsWith('/sm/')) {
@@ -82,7 +84,7 @@ export default async function render(url: string, template: string, context: { r
 
     const preloadLinks = renderPreloadLinks(ctx.modules, {})
     const teleports = renderTeleports(ctx.teleports)
-    const { headTags } = await renderSSRHead(head)
+    const { headTags } = head.render()
 
     content += `<script>window.__initialState__ = ${replaceHtmlTag(JSON.stringify(app.config.globalProperties.initialState))}</script>`
     content += `<script>window.__globalState__ = ${replaceHtmlTag(JSON.stringify(app.config.globalProperties.globalState))}</script>`
@@ -92,7 +94,7 @@ export default async function render(url: string, template: string, context: { r
         .replace(`<!--preload-links-->`, preloadLinks)
         .replace('<!--app-html-->', content)
         .replace('<!--head-tags-->', headTags)
-        .replace(/(\n|\r\n)\s*<!--app-teleports-->/, teleports)
+        .replace(teleportsRegex, teleports)
 
     return {
         html,

@@ -60,7 +60,7 @@ catalogs:
     '@iconify-json/vscode-icons': ^1.2.45
 
   lint:
-    '@lincy/eslint-config': ^7.0.0
+    '@lincy/eslint-config': ^7.1.0
     '@lincy/stylelint-config': ^2.2.2
     eslint: ^10.2.1
     eslint-plugin-format: ^2.0.1

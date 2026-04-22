@@ -1,0 +1,86 @@
+---
+description: 指定前端开发技术及规范
+alwaysApply: true
+---
+
+
+# 1. 技术栈统一规范
+- 框架：Vue3 + TypeScript（仅使用 `<script setup>` 语法）
+- UI 库：Element Plus（优先使用内置组件，禁止随意引入第三方 UI）
+- 样式：Element Plus 主题优先 + UnoCSS 原子类（仅做辅助，禁止过度使用）
+- 工程规范：组合式 API + 类型定义优先，禁止使用 Options API
+- 身份验证：JWT + HttpOnly Cookie（前端禁止直接操作 Token，仅后端读写 Cookie）
+
+# 2. 项目结构规范（强制目录约定）（Vue3 + TypeScript）
+```text
+frontend
+├── src/
+│   ├── api/            # API 请求封装（按模块拆分）
+│   ├── assets/         # 静态资源
+│   ├── components/     # 公共组件（Element Plus 二次封装）
+│   ├── composables/    # 组合式函数
+│   ├── layouts/        # 布局组件（管理端布局）
+│   ├── pages/          # 页面组件（按路由拆分）
+│   ├── router/         # Vue Router 路由配置
+│   ├── stores/         # 状态管理
+│   ├── types/          # 全局 TS 类型
+│   ├── utils/          # 工具函数
+│   ├── App.vue
+│   └── main.ts
+├── .env.development
+└── .env.production
+```
+
+# 3. 代码风格与语法规范
+## 3.1 通用规范
+- 语言：TypeScript 优先，所有文件必须添加类型定义，禁止使用 `any`（特殊场景需标注注释）
+- 命名规范：
+    - 文件命名：kebab-case（如 `user.controller.ts`、`login-page.vue`）
+    - 变量/函数：camelCase
+    - 类/类型/接口：PascalCase
+    - 常量：UPPER_SNAKE_CASE
+- 格式化：统一使用 Prettier，遵循项目内 `.prettierrc` 配置
+- 函数注释：在每个函数的开头添加注释，描述其功能。
+- 接口以 I 开头：interface IUser {}
+- 必传/可选字段明确标注
+- API 返回值必须定义类型
+- 使用`unplugin-auto-import`和`unplugin-vue-components`自动导入
+
+## 3.2 Vue3 + Element Plus规范
+### 1. 语法强制：仅使用 `<script setup lang="ts">`，禁止 Options API
+### 2. Element Plus 使用
+- 管理端表格、表单、弹窗、分页、导航必须使用 Element Plus 组件
+- 表单校验使用 Element Plus 内置规则，禁止自定义复杂校验
+- 主题定制统一在 `styles/element-theme.scss` 修改，禁止组件内覆盖样式
+### 3. API 封装
+- 所有接口统一在 `api/` 目录封装，返回 Promise + 类型定义
+- 请求/响应拦截器统一处理 Token、错误提示、登录过期
+### 4. 样式规范
+- 优先使用 Element Plus 内置样式类
+- 简单布局、间距使用 UnoCSS，禁止编写冗余 CSS
+### 5. 类型规范
+- 接口请求/响应类型统一放在 `types/` 目录
+- Props 必须使用 `defineProps<{ 类型 }>()` 定义
+- 为变量和函数使用描述性名称。在事件处理函数前加上“handle”前缀（例如，handleClick、handleKeyDown）。
+
+# 4. 接口与数据交互规范
+## 4.1 响应格式（前后端统一）
+```ts
+// 全局统一响应类型
+interface ApiResponse<T = any> {
+    code: number // 200 成功，401 未授权，500 服务器错误
+    message: string // 提示信息
+    data: T // 业务数据
+}
+```
+
+## 4.2 身份验证流程
+- 前端提交账号密码 → 后端校验 → 生成 JWT → 写入 HttpOnly Cookie
+- 前端后续请求自动携带 Cookie，后端插件自动校验 JWT
+- 登出：后端清除 Cookie，前端清空本地状态
+- 未授权自动跳转登录页（前端路由守卫 + 后端 401 响应）
+
+# 5. 环境变量与配置规范
+- 环境文件：.env.development / .env.production，禁止提交敏感信息到 Git
+- 前端配置：接口地址、静态资源域名从环境变量读取
+- 环境变量命名：VITE_*

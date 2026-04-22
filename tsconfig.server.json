@@ -9,6 +9,7 @@
     "moduleResolution": "bundler",
     "paths": {
       "#imports": ["./.nitro/types/nitro-imports"],
+      "#sqlite-drizzle": ["./server/db/drivers/sqlite.node.ts"],
       "~/*": ["./src/*"],
       "@/*": ["./src/*"],
       "~server/*": ["./server/*"],
@@ -29,5 +30,11 @@
     "skipLibCheck": true
   },
   "include": ["server/**/*.ts", ".nitro/types/*.ts"],
-  "exclude": ["./node_modules", "./dist/**/*", "./public/**/*", "./src/**/*"]
+  "exclude": [
+    "./node_modules",
+    "./dist/**/*",
+    "./public/**/*",
+    "./src/**/*",
+    "./server/db/drivers/sqlite.bun.ts"
+  ]
 }

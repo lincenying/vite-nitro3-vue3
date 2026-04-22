@@ -31,6 +31,7 @@ export default defineNitroConfig({
     serverDir: 'server',
     serveStatic: true,
     compatibilityDate: '2025-06-23',
+    errorHandler: './server/error.ts',
     // 代理
     routeRules: {
         '/php/**': {

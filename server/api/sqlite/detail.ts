@@ -1,15 +1,16 @@
 import type { QueryResult, User } from '~server/types'
-import { defineEventHandler, getQuery } from 'h3'
+import { defineEventHandler, getQuery, HTTPError } from 'h3'
 import { useDatabase } from 'nitro/database'
 
 export default defineEventHandler(async (event) => {
     const id = getQuery<{ id: number }>(event).id
 
     if (!id) {
-        return {
-            code: 400,
-            message: 'Invalid user id',
-        }
+        return new HTTPError({
+            status: 400,
+            statusMessage: 'ID不能为空',
+            data: { field: 'id' },
+        })
     }
 
     const db = useDatabase()

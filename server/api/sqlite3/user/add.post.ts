@@ -1,6 +1,6 @@
 import type { InsertSucces, User } from '~server/types'
 import { eq } from 'drizzle-orm'
-import { defineEventHandler, readBody } from 'h3'
+import { defineEventHandler, HTTPError, readBody } from 'h3'
 
 import { useSqlite3Drizzle } from '~server/db/client'
 import { mapUserRow } from '~server/db/maps'
@@ -14,10 +14,11 @@ export default defineEventHandler(async (event) => {
     const { firstName, lastName, email } = body!
 
     if (!firstName || !lastName || !email) {
-        return {
-            code: 400,
-            message: 'Invalid request',
-        }
+        return new HTTPError({
+            status: 400,
+            statusMessage: '请填写姓名、邮箱',
+            data: { field: 'firstName, lastName, email' },
+        })
     }
 
     const userId = String(Math.round(Math.random() * 10_000))

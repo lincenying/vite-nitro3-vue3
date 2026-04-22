@@ -1,8 +1,6 @@
 ---
-description: Git 提交信息规范
-alwaysApply: false
+alwaysApply: true
 ---
-
 You MUST always generate git commit messages in Simplified Chinese (简体中文).
 DO NOT use English for the description.
 

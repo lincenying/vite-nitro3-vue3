@@ -1,7 +1,7 @@
 import type { Article, InsertSucces } from '~server/types'
 import { UTC2Date } from '@lincy/utils'
 import { eq } from 'drizzle-orm'
-import { defineEventHandler, readBody } from 'h3'
+import { defineEventHandler, HTTPError, readBody } from 'h3'
 
 import { useSqlite3Drizzle } from '~server/db/client'
 import { article } from '~server/db/schema'
@@ -15,11 +15,20 @@ export default defineEventHandler(async (event) => {
 
     const date = UTC2Date('', 'yyyy-mm-dd hh:ii:ss')
 
-    if (id == null || id === '' || !title || !content || !category) {
-        return {
-            code: 400,
-            message: 'Invalid request',
-        }
+    if (!id) {
+        return new HTTPError({
+            status: 400,
+            statusMessage: 'ID不能为空',
+            data: { field: 'id' },
+        })
+    }
+
+    if (!title || !content || !category) {
+        return new HTTPError({
+            status: 400,
+            statusMessage: '请填写标题、内容、分类',
+            data: { field: 'title, content, category' },
+        })
     }
 
     const run = db.update(article).set({

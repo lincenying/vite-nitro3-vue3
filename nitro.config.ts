@@ -11,7 +11,7 @@ const proxyDomain = process.env.NITRO_HOST_API_URL || 'https://php.mmxiaowu.com'
  * - `'bun'`：Nitro Bun 预设 + db0 `bun-sqlite` + Drizzle `drizzle-orm/bun-sqlite`（见 `#sqlite-drizzle` 别名）
  * - `undefined`：Node 运行时 + `better-sqlite3`
  */
-const nitroPreset = 'node_server' as NitroConfig['preset']
+const nitroPreset = process.env.NITRO_PRESET || 'node_server' as NitroConfig['preset']
 
 const sqliteConnector = nitroPreset === 'bun' ? 'bun-sqlite' : 'better-sqlite3'
 const sqliteDrizzleDriver = path.join(

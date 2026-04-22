@@ -8,10 +8,10 @@ import { archive } from '~server/db/schema'
 export default defineEventHandler(async (event) => {
     const db = useArchiveDrizzle()
 
-    const q = getQuery<ListPageType>(event)
-    const page = Number(q.page) > 0 ? Number(q.page) : 1
-    const pageSize = Number(q.pageSize) > 0 ? Number(q.pageSize) : 12
-    const { category } = q
+    const query = getQuery<ListPageType>(event)
+    const page = Number(query.page) > 0 ? Number(query.page) : 1
+    const pageSize = Number(query.pageSize) > 0 ? Number(query.pageSize) : 12
+    const { category } = query
 
     const offset = (page - 1) * pageSize
 

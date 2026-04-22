@@ -57,7 +57,7 @@ catalogs:
     '@iconify-json/carbon': ^1.2.20
     '@iconify-json/fad': ^1.2.1
     '@iconify-json/svg-spinners': ^1.2.4
-    '@iconify-json/vscode-icons': ^1.2.45
+    '@iconify-json/vscode-icons': ^1.2.46
 
   lint:
     '@lincy/eslint-config': ^7.1.0
@@ -79,7 +79,7 @@ catalogs:
     better-sqlite3: ^12.9.0
     default-passive-events: ^4.0.0
     destr: ^2.0.5
-    drizzle-orm: ^0.45.1
+    drizzle-orm: ^0.45.2
     element-plus: ^2.13.7
     highlight.js: ^11.11.1
     lodash: ^4.18.1
@@ -91,7 +91,7 @@ catalogs:
     qs: ^6.15.1
     store2: ^2.14.4
     twig: ^3.0.0
-    vue: ^3.5.32
+    vue: ^3.5.33
     vue-router: ^5.0.4
 
   types:

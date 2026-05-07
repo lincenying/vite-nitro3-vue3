@@ -34,3 +34,4 @@ playwright-report/
 .nitro
 .output
 .archive
+.cursor/rules/global*.mdc

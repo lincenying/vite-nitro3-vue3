@@ -32,6 +32,7 @@
     "destr": "catalog:prod",
     "drizzle-orm": "catalog:prod",
     "element-plus": "catalog:prod",
+    "elysia": "catalog:prod",
     "highlight.js": "catalog:prod",
     "lodash": "catalog:prod",
     "markdown-it-link-attributes": "catalog:prod",

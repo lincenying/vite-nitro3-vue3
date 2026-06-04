@@ -34,7 +34,7 @@ trustPolicyExclude:
 catalogs:
   dev:
     '@lincy/polyfill-useragent-normaliser': ^1.10.2
-    '@lincy/unocss-base-config': ^2.7.1
+    '@lincy/unocss-base-config': ^2.7.3
     '@mrhenry/polyfill-library': ^5.2.1
     '@unocss/eslint-plugin': ^66.7.0
     '@vitejs/plugin-vue': ^6.0.7
@@ -43,43 +43,43 @@ catalogs:
     '@vue-macros/define-props-refs': ^3.1.2
     '@vue-macros/reactivity-transform': ^3.1.2
     '@vue-macros/volar': ^3.1.2
-    baseline-browser-mapping: ^2.10.31
+    baseline-browser-mapping: ^2.10.33
     cross-env: ^10.1.0
     jiti: ^2.7.0
     mockjs: ^1.1.0
-    nitro: ^3.0.260429-beta
+    nitro: ^3.0.260522-beta
     sass-embedded: ^1.100.0
     typescript: ~6.0.3
     unocss: ^66.7.0
     unplugin-auto-import: ^21.0.0
     unplugin-icons: ^23.0.1
     unplugin-vue-components: ^32.1.0
-    vite: ^8.0.14
-    vite-plugin-inspect: ^12.0.0-beta.2
+    vite: ^8.0.16
+    vite-plugin-inspect: ^12.0.0-beta.3
     vite-plugin-progress: ^0.0.7
     vue-macros: ^3.1.2
-    vue-tsc: ^3.3.1
+    vue-tsc: ^3.3.3
 
   icons:
     '@element-plus/icons-vue': ^2.3.2
     '@iconify-json/carbon': ^1.2.22
     '@iconify-json/fad': ^1.2.1
     '@iconify-json/svg-spinners': ^1.2.4
-    '@iconify-json/vscode-icons': ^1.2.50
+    '@iconify-json/vscode-icons': ^1.2.53
 
   lint:
     '@lincy/eslint-config': ^7.2.0
-    '@lincy/stylelint-config': ^2.2.2
-    eslint: ^10.4.0
+    '@lincy/stylelint-config': ^2.2.3
+    eslint: ^10.4.1
     eslint-plugin-format: ^2.0.1
     stylelint: ^17.12.0
 
   prod:
     '@lincy/async-validation': ^1.4.0
     '@lincy/utils': ^0.7.3
-    '@tanstack/vue-query': ^5.100.11
+    '@tanstack/vue-query': ^5.101.0
     '@tato30/vue-pdf': ^2.1.0
-    '@unhead/vue': ^3.1.0
+    '@unhead/vue': ^3.1.1
     '@unocss/reset': ^66.7.0
     '@vueuse/core': ^14.3.0
     '@vueuse/router': ^14.3.0
@@ -88,7 +88,7 @@ catalogs:
     default-passive-events: ^4.0.0
     destr: ^2.0.5
     drizzle-orm: ^0.45.2
-    element-plus: ^2.14.0
+    element-plus: ^2.14.1
     elysia: ^1.4.28
     highlight.js: ^11.11.1
     lodash: ^4.18.1
@@ -100,8 +100,8 @@ catalogs:
     qs: ^6.15.2
     store2: ^2.14.4
     twig: ^3.0.0
-    vue: ^3.5.34
-    vue-router: ^5.0.7
+    vue: ^3.5.35
+    vue-router: ^5.1.0
 
   types:
     '@types/markdown-it-link-attributes': ^3.0.5

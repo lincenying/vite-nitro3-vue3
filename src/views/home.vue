@@ -76,10 +76,9 @@
 
 <script setup lang="ts">
 import type { ElAffixType } from '~/types/global.types'
-import type { ProductCategory } from '~/types/pinia.types'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 import { appName } from '~/constants'
-import { scrollToNav } from '~/utils'
+import { scrollToElement } from '~/utils'
 
 defineOptions({
     name: 'RouterHome',
@@ -122,20 +121,10 @@ const payload = computed(() => {
     }
 })
 
-const { data } = await useAsyncData('productCategory', () => {
-    return $api.get<ProductCategory[]>('/home/category?category=2')
-})
-
-console.group('product-category')
-console.log('%c[data.value] >> ', 'color: red')
-console.log(data.value)
-console.log('%c<< [data.value]', 'color: red')
-console.groupEnd()
-
 watch(() => [category, tag], () => {
     page = 1
     productStore.getIndex(payload.value)
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 })
 
 const loading = ref<boolean>(false)
@@ -145,7 +134,7 @@ async function currentChange(newPage: number) {
     page = newPage
     await productStore.getIndex(payload.value)
     loading.value = false
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 }
 
 const affix = ref<ElAffixType>()
@@ -162,20 +151,11 @@ useSaveScroll()
 let unsubscribe: () => void
 
 onMounted(() => {
-    console.log(`onMounted`)
-
-    emitter.on('change-category', (newCategoryId) => {
-        console.log('%c[newCategoryId1] >> ', 'color: red', newCategoryId)
-    })
-
-    unsubscribe = changeCategory.on((newCategoryId) => {
-        console.log('%c[newCategoryId2] >> ', 'color: red', newCategoryId)
-    })
+    unsubscribe = changeCategory.on(() => {})
     ctx.$notify.success('This is a success message.')
 })
 
 onUnmounted(() => {
-    emitter.off('change-category')
     unsubscribe()
 })
 </script>

@@ -49,8 +49,6 @@ import './assets/scss/global/animate.min.css'
 import './assets/scss/global/global.scss'
 import './assets/scss/style.scss'
 
-console.log(`VITE_APP_ENV: ${import.meta.env.VITE_APP_ENV}`)
-
 const { app, router } = createApp()
 
 const head = createHead()
@@ -67,5 +65,4 @@ router.isReady().then(() => {
         routerBeforeResolve(router)
     }
     app.use(head).use(globalPlugin).mount('#app')
-    console.log('client router ready')
 })

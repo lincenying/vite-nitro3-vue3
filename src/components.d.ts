@@ -13,6 +13,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ArticleDialogPost: typeof import('./components/article/dialog-post.vue')['default']
+    ContentDetailContent: typeof import('./components/content/detail-content.vue')['default']
+    ContentDetailSkeleton: typeof import('./components/content/detail-skeleton.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -46,6 +48,8 @@ declare module 'vue' {
 // For TSX support
 declare global {
   const ArticleDialogPost: typeof import('./components/article/dialog-post.vue')['default']
+  const ContentDetailContent: typeof import('./components/content/detail-content.vue')['default']
+  const ContentDetailSkeleton: typeof import('./components/content/detail-skeleton.vue')['default']
   const ElAffix: typeof import('element-plus/es')['ElAffix']
   const ElButton: typeof import('element-plus/es')['ElButton']
   const ElDialog: typeof import('element-plus/es')['ElDialog']

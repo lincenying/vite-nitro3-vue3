@@ -16,31 +16,17 @@
                 <div class="main" w-1px ml-24px flex="auto">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
-                            <div bg="hex-fff" mb-24px p-32px>
-                                <div flex="~ items-center col">
-                                    <el-skeleton-item variant="text" class="!w-1/2 !h-44px" />
-                                    <el-skeleton-item variant="text" class="!w-50% !h-21px mt-16px" />
-                                </div>
-                                <div v-for="i in 6" :key="i" mt-21px>
-                                    <el-skeleton-item variant="text" class="!h-21px ml-32px !w-80%" />
-                                    <el-skeleton-item v-for="item in 4" :key="`${i}-${item}`" variant="text" class="!h-21px mt-6px" />
-                                </div>
-                            </div>
+                            <ContentDetailSkeleton />
                         </template>
                         <template #default>
-                            <div b-rd-6px mb-24px p-32px bg="hex-fff">
-                                <h1 font-bold text="center hex-202935 28px">{{ productDetail.title }}</h1>
-                                <div flex="~ justify-center items-center" mt-16px text="hex-8a8a8a">
-                                    <i class="i-carbon-user-avatar" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ productDetail.author }}</span>
-                                    <i class="i-carbon-time" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ productDetail.date }}</span>
-                                    <i class="i-carbon-collapse-categories" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ productDetail.category }}</span>
-                                    <span>阅读({{ productDetail.views }})</span>
-                                </div>
-                                <div class="article-content" pt-24px text="hex-202935 16px" lh-28px v-html="productDetail.content"></div>
-                            </div>
+                            <ContentDetailContent
+                                :title="productDetail.title"
+                                :author="productDetail.author"
+                                :date="productDetail.date"
+                                :category="productDetail.category"
+                                :views="productDetail.views"
+                                :content="sanitizedContent"
+                            />
                         </template>
                     </el-skeleton>
                     <OtherRelatedRecom column="products" :category-id="productDetail.category_id"></OtherRelatedRecom>
@@ -61,7 +47,6 @@ import { scrollToNav } from '~/utils'
 defineOptions({
     name: 'RouterHomeDetail',
     asyncData(ctx) {
-        console.log('RouterHomeDetail-asyncData')
         const { store, route, api } = ctx
         const {
             query: { id },
@@ -89,6 +74,8 @@ const productStore = useProductStore()
 const { detail } = storeToRefs(productStore)
 
 const productDetail = computed(() => detail.value[id] || {})
+
+const sanitizedContent = computed(() => sanitizeHtml(productDetail.value.content || ''))
 
 const navigation = ref<HTMLElement>()
 

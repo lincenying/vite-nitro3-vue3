@@ -1,5 +1,5 @@
 import type { InferSelectModel } from 'drizzle-orm'
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 /** 与 `server/api/sqlite3/init.ts` 中 DDL 一致 */
 export const users = sqliteTable('users', {
@@ -10,6 +10,18 @@ export const users = sqliteTable('users', {
     email: text('email'),
 })
 
+/** 登录鉴权用户表 */
+export const authUsers = sqliteTable('auth_users', {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    name: text('name').notNull(),
+    passwordHash: text('password_hash').notNull(),
+    nickName: text('nickName'),
+    role: text('role'),
+    isAdmin: integer('is_admin').default(0),
+})
+
+export type AuthUserRow = InferSelectModel<typeof authUsers>
+
 export const article = sqliteTable('article', {
     id: integer('id').primaryKey({ autoIncrement: true }),
     title: text('title'),
@@ -18,7 +30,9 @@ export const article = sqliteTable('article', {
     category: text('category'),
     views: integer('views'),
     date: text('date'),
-})
+}, table => [
+    index('article_views_idx').on(table.views),
+])
 
 /** 归档库 `.archive/db.sqlite3` 中的 `archive` 表 */
 export const archive = sqliteTable('archive', {

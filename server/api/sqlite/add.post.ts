@@ -1,8 +1,10 @@
 import type { InsertSucces, User } from '~server/types'
 import { defineEventHandler, HTTPError, readBody } from 'h3'
 import { useDatabase } from 'nitro/database'
+import { requireDevelopment } from '~server/utils/auth-guard'
 
 export default defineEventHandler(async (event) => {
+    requireDevelopment(event)
     const db = useDatabase()
 
     const body = await readBody<User>(event)

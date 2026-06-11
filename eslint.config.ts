@@ -19,6 +19,12 @@ const config = lincy(
             stylistic: {
                 'style/jsx-max-props-per-line': ['error', { maximum: 4 }],
             },
+            javascript: {
+                'node/prefer-global/process': 'off',
+            },
+            typescript: {
+                'node/prefer-global/process': 'off',
+            },
             ignores: [
                 '**/assets',
                 '**/static',

@@ -1,55 +1,46 @@
-import type { UserListType } from '~server/types'
 import { defineEventHandler, readBody, setCookie } from 'h3'
+import { authConfig } from '~server/config/auth'
+import { loginUser } from '~server/services/user.service'
 
 export default defineEventHandler(async (event) => {
-    const users: UserListType[] = [{
-        name: 'admin',
-        nickName: 'admin',
-        role: '系统管理员',
-        password: '123456',
-        isAdmin: '1',
-        token: 'admin',
-        info: {
-            name: '系统管理员',
-        },
-    }, {
-        name: 'editor',
-        nickName: 'editor',
-        role: '系统管理员',
-        password: '123456',
-        isAdmin: '1',
-        token: 'editor',
-        info: {
-            name: '编辑人员',
-        },
-    }, {
-        name: 'test',
-        nickName: 'test',
-        role: '系统管理员',
-        password: '123456',
-        isAdmin: '1',
-        token: 'test',
-        info: {
-            name: '测试人员',
-        },
-    }]
-
     const body = await readBody<{ name: string, password: string }>(event)
 
-    const user = users.find((user) => {
-        return body?.name === user.name && body?.password === user.password
-    })
-    if (user) {
-        setCookie(event, 'token', user.token, { maxAge: 60 * 60 * 24 * 7 })
+    if (!body?.name || !body?.password) {
         return {
-            code: 200,
-            data: user,
-            message: 'success',
+            code: 400,
+            message: '用户名和密码不能为空',
+            data: null,
         }
     }
+
+    const user = await loginUser(body.name.trim(), body.password)
+    if (!user) {
+        return {
+            code: 401,
+            message: '用户名或密码错误',
+            data: null,
+        }
+    }
+
+    setCookie(event, authConfig.cookieName, user.token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: authConfig.cookieMaxAge,
+        path: '/',
+    })
+
     return {
-        code: 401,
-        data: null,
-        message: '用户名或密码错误',
+        code: 200,
+        message: 'success',
+        data: {
+            name: user.name,
+            nickName: user.nickName,
+            role: user.role,
+            isAdmin: user.isAdmin,
+            info: {
+                name: user.nickName,
+            },
+        },
     }
 })

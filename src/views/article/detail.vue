@@ -15,16 +15,7 @@
                 <div class="main" w-1px ml-24px flex="auto">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
-                            <div bg="hex-fff" mb-24px p-32px>
-                                <div flex="~ items-center col">
-                                    <el-skeleton-item variant="text" class="!w-1/2 !h-44px" />
-                                    <el-skeleton-item variant="text" class="!w-50% !h-21px mt-16px" />
-                                </div>
-                                <div v-for="i in 6" :key="i" mt-21px>
-                                    <el-skeleton-item variant="text" class="!h-21px ml-32px !w-80%" />
-                                    <el-skeleton-item v-for="item in 4" :key="`${i}-${item}`" variant="text" class="!h-21px mt-6px" />
-                                </div>
-                            </div>
+                            <ContentDetailSkeleton />
                         </template>
                         <template #default>
                             <div b-rd-6px mb-24px p-32px bg="hex-fff">
@@ -39,7 +30,7 @@
                                     <span mr-20px>阅读({{ articleDetail.views }})</span>
                                     <span cursor-pointer @click="handleModify">编辑</span>
                                 </div>
-                                <div class="article-content" pt-24px text="hex-202935 16px" lh-28px v-html="nl2br(articleDetail.content)"></div>
+                                <div class="article-content" pt-24px text="hex-202935 16px" lh-28px v-html="sanitizedContent"></div>
                             </div>
                         </template>
                     </el-skeleton>
@@ -64,7 +55,6 @@ import { nl2br, scrollToNav } from '~/utils'
 defineOptions({
     name: 'RouterArticleDetail',
     asyncData(ctx) {
-        console.log('RouterArticleDetail-asyncData')
         const { store, route, api } = ctx
         const {
             query: { id },
@@ -93,6 +83,8 @@ const articleStore = useArticleStore()
 const { detail } = storeToRefs(articleStore)
 
 const articleDetail = computed(() => detail.value[id] || {})
+
+const sanitizedContent = computed(() => sanitizeHtml(nl2br(articleDetail.value.content || '')))
 
 const navigation = ref<HTMLElement>()
 

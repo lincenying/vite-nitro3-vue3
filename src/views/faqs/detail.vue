@@ -15,31 +15,18 @@
                 <div class="main" w-1px ml-24px flex="auto">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
-                            <div bg="hex-fff" mb-24px p-32px>
-                                <div flex="~ items-center col">
-                                    <el-skeleton-item variant="text" class="!w-1/2 !h-44px" />
-                                    <el-skeleton-item variant="text" class="!w-50% !h-21px mt-16px" />
-                                </div>
-                                <div v-for="i in 6" :key="i" mt-21px>
-                                    <el-skeleton-item variant="text" class="!h-21px ml-32px !w-80%" />
-                                    <el-skeleton-item v-for="item in 4" :key="`${i}-${item}`" variant="text" class="!h-21px mt-6px" />
-                                </div>
-                            </div>
+                            <ContentDetailSkeleton />
                         </template>
                         <template #default>
-                            <div v-if="faqDetail" b-rd-6px mb-24px p-32px bg="hex-fff">
-                                <h1 font-bold text="center hex-202935 28px">{{ faqDetail.title }}</h1>
-                                <div flex="~ justify-center items-center" mt-16px text="hex-8a8a8a">
-                                    <i class="i-carbon-user-avatar" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ faqDetail.author }}</span>
-                                    <i class="i-carbon-time" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ faqDetail.date }}</span>
-                                    <i class="i-carbon-collapse-categories" w-14px h-14px mr-5px></i>
-                                    <span mr-20px>{{ faqDetail.category }}</span>
-                                    <span>阅读({{ faqDetail.views }})</span>
-                                </div>
-                                <div class="article-content" pt-24px text="hex-202935 16px" lh-28px v-html="faqDetail.content"></div>
-                            </div>
+                            <ContentDetailContent
+                                v-if="faqDetail"
+                                :title="faqDetail.title"
+                                :author="faqDetail.author"
+                                :date="faqDetail.date"
+                                :category="faqDetail.category"
+                                :views="faqDetail.views"
+                                :content="sanitizedContent"
+                            />
                         </template>
                     </el-skeleton>
                     <OtherRelatedRecom column="faqs"></OtherRelatedRecom>
@@ -60,7 +47,6 @@ import { scrollToNav } from '~/utils'
 defineOptions({
     name: 'RouterFaqsDetail',
     asyncData(ctx) {
-        console.log('RouterFaqsDetail-asyncData')
         const { store, route, api } = ctx
         const {
             query: { id },
@@ -89,6 +75,8 @@ const faqsStore = useFaqsStore()
 const { detail } = storeToRefs(faqsStore)
 
 const faqDetail = computed(() => detail.value[id] || {})
+
+const sanitizedContent = computed(() => sanitizeHtml(faqDetail.value.content || ''))
 
 const navigation = ref<HTMLElement>()
 

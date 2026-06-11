@@ -78,7 +78,6 @@ export function useSaveScroll() {
     })
 
     onBeforeRouteLeave((_to, from) => {
-        console.log('onBeforeRouteLeave', from.fullPath)
         // 将当前页面的滚动位置保存到本地存储中
         const scrollTop = window.scrollY || 0
         if (scrollTop === 0) {

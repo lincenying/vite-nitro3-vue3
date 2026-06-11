@@ -62,10 +62,9 @@
 
 <script setup lang="ts">
 import type { ElAffixType } from '~/types/global.types'
-import type { ProductCategory } from '~/types/pinia.types'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 import { appName } from '~/constants'
-import { scrollToNav } from '~/utils'
+import { scrollToElement } from '~/utils'
 
 defineOptions({
     name: 'RouterCases',
@@ -105,29 +104,11 @@ const payload = computed(() => {
     }
 })
 
-const { data: posts, pending, error } = await _useAsyncData({
-    key: 'user-data',
-    handler: async () => {
-        return await $api.get<ProductCategory[]>('/home/category?category=1')
-    },
-    server: false,
-})
-
-watch([posts, pending, error], () => {
-    console.group('cases-watch')
-    console.log('%c[posts] >> ', 'color: red', posts.value)
-    console.log('%c[pending] >> ', 'color: red', pending.value)
-    console.log('%c[error] >> ', 'color: red', error.value)
-    console.groupEnd()
-}, {
-    immediate: true,
-})
-
 const navigation = ref<HTMLElement>()
 
 watch(() => [category, tag], () => {
     page = 1
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 })
 
 const loading = ref<boolean>(false)
@@ -137,7 +118,7 @@ async function currentChange(newPage: number) {
     page = newPage
     await casesStore.getIndex(payload.value)
     loading.value = false
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 }
 
 const affix = ref<ElAffixType>()

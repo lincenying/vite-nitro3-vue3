@@ -44,6 +44,7 @@ declare global {
   const controlledComputed: typeof import('@vueuse/core').controlledComputed
   const controlledRef: typeof import('@vueuse/core').controlledRef
   const createApp: typeof import('vue').createApp
+  const createContentStore: typeof import('./stores/create-content-store').createContentStore
   const createDisposableDirective: typeof import('@vueuse/core').createDisposableDirective
   const createEventHook: typeof import('@vueuse/core').createEventHook
   const createGlobalState: typeof import('@vueuse/core').createGlobalState
@@ -84,6 +85,25 @@ declare global {
   const faqsDetailStore: typeof import('./composables/storage').faqsDetailStore
   const faqsListStore: typeof import('./composables/storage').faqsListStore
   const faqsStoreWithout: typeof import('./stores/use-faqs-store').faqsStoreWithout
+  const fetchArticleDetail: typeof import('./api/article').fetchArticleDetail
+  const fetchArticleList: typeof import('./api/article').fetchArticleList
+  const fetchArticleRelatedRecom: typeof import('./api/article').fetchArticleRelatedRecom
+  const fetchCasesDetail: typeof import('./api/cases').fetchCasesDetail
+  const fetchCasesList: typeof import('./api/cases').fetchCasesList
+  const fetchCasesRelatedRecom: typeof import('./api/cases').fetchCasesRelatedRecom
+  const fetchFaqsDetail: typeof import('./api/faqs').fetchFaqsDetail
+  const fetchFaqsList: typeof import('./api/faqs').fetchFaqsList
+  const fetchFaqsRelatedRecom: typeof import('./api/faqs').fetchFaqsRelatedRecom
+  const fetchNewsDetail: typeof import('./api/news').fetchNewsDetail
+  const fetchNewsList: typeof import('./api/news').fetchNewsList
+  const fetchNewsRecommend: typeof import('./api/news').fetchNewsRecommend
+  const fetchNewsRelatedRecom: typeof import('./api/news').fetchNewsRelatedRecom
+  const fetchProductCategory: typeof import('./api/product').fetchProductCategory
+  const fetchProductDetail: typeof import('./api/product').fetchProductDetail
+  const fetchProductList: typeof import('./api/product').fetchProductList
+  const fetchProductRecommend: typeof import('./api/product').fetchProductRecommend
+  const fetchProductRelatedRecom: typeof import('./api/product').fetchProductRelatedRecom
+  const fetchUserProfile: typeof import('./api/user').fetchUserProfile
   const getAppInstance: typeof import('./composables/asyncData').getAppInstance
   const getContext: typeof import('./composables/asyncData').getContext
   const getCurrentInstance: typeof import('vue').getCurrentInstance
@@ -104,6 +124,8 @@ declare global {
   const isSSR: typeof import('./composables/index').isSSR
   const isShallow: typeof import('vue').isShallow
   const loginMsgBox: typeof import('./composables/message').loginMsgBox
+  const loginUser: typeof import('./api/user').loginUser
+  const logoutUser: typeof import('./api/user').logoutUser
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
   const markRaw: typeof import('vue').markRaw
   const newsCommentStore: typeof import('./composables/storage').newsCommentStore
@@ -111,6 +133,8 @@ declare global {
   const newsListStore: typeof import('./composables/storage').newsListStore
   const newsStoreWithout: typeof import('./stores/use-news-store').newsStoreWithout
   const nextTick: typeof import('vue').nextTick
+  const nl2br: typeof import('./utils/index').nl2br
+  const normalizeCookiePath: typeof import('./utils/index').normalizeCookiePath
   const onActivated: typeof import('vue').onActivated
   const onBeforeMount: typeof import('vue').onBeforeMount
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
@@ -165,9 +189,14 @@ declare global {
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
   const routerKey: typeof import('./composables/provide').routerKey
+  const sanitizeHtml: typeof import('./utils/sanitize').sanitizeHtml
+  const scrollToComment: typeof import('./utils/index').scrollToComment
+  const scrollToElement: typeof import('./utils/index').scrollToElement
+  const scrollToNav: typeof import('./utils/index').scrollToNav
   const setClientInstanceProperties: typeof import('./composables/asyncData').setClientInstanceProperties
   const setMenuActive: typeof import('./composables/emitter').setMenuActive
   const setupPinia: typeof import('./stores/index').setupPinia
+  const setupStoreHMR: typeof import('./stores/create-content-store').setupStoreHMR
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
@@ -416,6 +445,9 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { IListPayload } from './api/types'
+  import('./api/types')
 }
 
 // for vue template auto import
@@ -425,18 +457,13 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
     readonly $fetch: UnwrapRef<typeof import('./composables/fetch')['$fetch']>
-    readonly Delete: UnwrapRef<typeof import('./composables/alova')['Delete']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly ElLoading: UnwrapRef<typeof import('./config/element')['ElLoading']>
     readonly ElMessage: UnwrapRef<typeof import('./config/element')['ElMessage']>
     readonly ElMessageBox: UnwrapRef<typeof import('./config/element')['ElMessageBox']>
     readonly ElNotification: UnwrapRef<typeof import('./config/element')['ElNotification']>
-    readonly Get: UnwrapRef<typeof import('./composables/alova')['Get']>
-    readonly Post: UnwrapRef<typeof import('./composables/alova')['Post']>
-    readonly Put: UnwrapRef<typeof import('./composables/alova')['Put']>
     readonly _useAsyncData: UnwrapRef<typeof import('./composables/ssr-fetch')['_useAsyncData']>
     readonly _useFetch: UnwrapRef<typeof import('./composables/ssr-fetch')['_useFetch']>
-    readonly alova: UnwrapRef<typeof import('./composables/alova')['default']>
     readonly articleCommentStore: UnwrapRef<typeof import('./composables/storage')['articleCommentStore']>
     readonly articleDetailStore: UnwrapRef<typeof import('./composables/storage')['articleDetailStore']>
     readonly articleListStore: UnwrapRef<typeof import('./composables/storage')['articleListStore']>
@@ -461,6 +488,7 @@ declare module 'vue' {
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createContentStore: UnwrapRef<typeof import('./stores/create-content-store')['createContentStore']>
     readonly createDisposableDirective: UnwrapRef<typeof import('@vueuse/core')['createDisposableDirective']>
     readonly createEventHook: UnwrapRef<typeof import('@vueuse/core')['createEventHook']>
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
@@ -495,12 +523,30 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly element: UnwrapRef<typeof import('./config/element')['default']>
-    readonly emitter: UnwrapRef<typeof import('./composables/emitter')['default']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly faqCommentStore: UnwrapRef<typeof import('./composables/storage')['faqCommentStore']>
     readonly faqsDetailStore: UnwrapRef<typeof import('./composables/storage')['faqsDetailStore']>
     readonly faqsListStore: UnwrapRef<typeof import('./composables/storage')['faqsListStore']>
     readonly faqsStoreWithout: UnwrapRef<typeof import('./stores/use-faqs-store')['faqsStoreWithout']>
+    readonly fetchArticleDetail: UnwrapRef<typeof import('./api/article')['fetchArticleDetail']>
+    readonly fetchArticleList: UnwrapRef<typeof import('./api/article')['fetchArticleList']>
+    readonly fetchArticleRelatedRecom: UnwrapRef<typeof import('./api/article')['fetchArticleRelatedRecom']>
+    readonly fetchCasesDetail: UnwrapRef<typeof import('./api/cases')['fetchCasesDetail']>
+    readonly fetchCasesList: UnwrapRef<typeof import('./api/cases')['fetchCasesList']>
+    readonly fetchCasesRelatedRecom: UnwrapRef<typeof import('./api/cases')['fetchCasesRelatedRecom']>
+    readonly fetchFaqsDetail: UnwrapRef<typeof import('./api/faqs')['fetchFaqsDetail']>
+    readonly fetchFaqsList: UnwrapRef<typeof import('./api/faqs')['fetchFaqsList']>
+    readonly fetchFaqsRelatedRecom: UnwrapRef<typeof import('./api/faqs')['fetchFaqsRelatedRecom']>
+    readonly fetchNewsDetail: UnwrapRef<typeof import('./api/news')['fetchNewsDetail']>
+    readonly fetchNewsList: UnwrapRef<typeof import('./api/news')['fetchNewsList']>
+    readonly fetchNewsRecommend: UnwrapRef<typeof import('./api/news')['fetchNewsRecommend']>
+    readonly fetchNewsRelatedRecom: UnwrapRef<typeof import('./api/news')['fetchNewsRelatedRecom']>
+    readonly fetchProductCategory: UnwrapRef<typeof import('./api/product')['fetchProductCategory']>
+    readonly fetchProductDetail: UnwrapRef<typeof import('./api/product')['fetchProductDetail']>
+    readonly fetchProductList: UnwrapRef<typeof import('./api/product')['fetchProductList']>
+    readonly fetchProductRecommend: UnwrapRef<typeof import('./api/product')['fetchProductRecommend']>
+    readonly fetchProductRelatedRecom: UnwrapRef<typeof import('./api/product')['fetchProductRelatedRecom']>
+    readonly fetchUserProfile: UnwrapRef<typeof import('./api/user')['fetchUserProfile']>
     readonly getAppInstance: UnwrapRef<typeof import('./composables/asyncData')['getAppInstance']>
     readonly getContext: UnwrapRef<typeof import('./composables/asyncData')['getContext']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
@@ -521,6 +567,8 @@ declare module 'vue' {
     readonly isSSR: UnwrapRef<typeof import('./composables/index')['isSSR']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
     readonly loginMsgBox: UnwrapRef<typeof import('./composables/message')['loginMsgBox']>
+    readonly loginUser: UnwrapRef<typeof import('./api/user')['loginUser']>
+    readonly logoutUser: UnwrapRef<typeof import('./api/user')['logoutUser']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly newsCommentStore: UnwrapRef<typeof import('./composables/storage')['newsCommentStore']>
@@ -528,6 +576,8 @@ declare module 'vue' {
     readonly newsListStore: UnwrapRef<typeof import('./composables/storage')['newsListStore']>
     readonly newsStoreWithout: UnwrapRef<typeof import('./stores/use-news-store')['newsStoreWithout']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
+    readonly nl2br: UnwrapRef<typeof import('./utils/index')['nl2br']>
+    readonly normalizeCookiePath: UnwrapRef<typeof import('./utils/index')['normalizeCookiePath']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -581,9 +631,14 @@ declare module 'vue' {
     readonly resetSSRInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['resetSSRInstanceProperties']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly routerKey: UnwrapRef<typeof import('./composables/provide')['routerKey']>
+    readonly sanitizeHtml: UnwrapRef<typeof import('./utils/sanitize')['sanitizeHtml']>
+    readonly scrollToComment: UnwrapRef<typeof import('./utils/index')['scrollToComment']>
+    readonly scrollToElement: UnwrapRef<typeof import('./utils/index')['scrollToElement']>
+    readonly scrollToNav: UnwrapRef<typeof import('./utils/index')['scrollToNav']>
     readonly setClientInstanceProperties: UnwrapRef<typeof import('./composables/asyncData')['setClientInstanceProperties']>
     readonly setMenuActive: UnwrapRef<typeof import('./composables/emitter')['setMenuActive']>
     readonly setupPinia: UnwrapRef<typeof import('./stores/index')['setupPinia']>
+    readonly setupStoreHMR: UnwrapRef<typeof import('./stores/create-content-store')['setupStoreHMR']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
@@ -679,13 +734,11 @@ declare module 'vue' {
     readonly useFaqsStore: UnwrapRef<typeof import('./stores/use-faqs-store')['default']>
     readonly useFavicon: UnwrapRef<typeof import('@vueuse/core')['useFavicon']>
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
-    readonly useFetcher: UnwrapRef<typeof import('./composables/alova')['useFetcher']>
     readonly useFileDialog: UnwrapRef<typeof import('@vueuse/core')['useFileDialog']>
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
     readonly useFilters: UnwrapRef<typeof import('./composables/filters')['useFilters']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
-    readonly useForm: UnwrapRef<typeof import('./composables/alova')['useForm']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
@@ -725,7 +778,6 @@ declare module 'vue' {
     readonly useOffsetPagination: UnwrapRef<typeof import('@vueuse/core')['useOffsetPagination']>
     readonly useOnline: UnwrapRef<typeof import('@vueuse/core')['useOnline']>
     readonly usePageLeave: UnwrapRef<typeof import('@vueuse/core')['usePageLeave']>
-    readonly usePagination: UnwrapRef<typeof import('./composables/alova')['usePagination']>
     readonly useParallax: UnwrapRef<typeof import('@vueuse/core')['useParallax']>
     readonly useParentElement: UnwrapRef<typeof import('@vueuse/core')['useParentElement']>
     readonly usePerformanceObserver: UnwrapRef<typeof import('@vueuse/core')['usePerformanceObserver']>
@@ -743,7 +795,6 @@ declare module 'vue' {
     readonly useProductStore: UnwrapRef<typeof import('./stores/use-product-store')['default']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
-    readonly useRequest: UnwrapRef<typeof import('./composables/alova')['useRequest']>
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouteHash: UnwrapRef<typeof import('@vueuse/router')['useRouteHash']>
@@ -758,8 +809,6 @@ declare module 'vue' {
     readonly useScriptTag: UnwrapRef<typeof import('@vueuse/core')['useScriptTag']>
     readonly useScroll: UnwrapRef<typeof import('@vueuse/core')['useScroll']>
     readonly useScrollLock: UnwrapRef<typeof import('@vueuse/core')['useScrollLock']>
-    readonly useSerialRequest: UnwrapRef<typeof import('./composables/alova')['useSerialRequest']>
-    readonly useSerialWatcher: UnwrapRef<typeof import('./composables/alova')['useSerialWatcher']>
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -800,7 +849,6 @@ declare module 'vue' {
     readonly useVibrate: UnwrapRef<typeof import('@vueuse/core')['useVibrate']>
     readonly useVirtualList: UnwrapRef<typeof import('@vueuse/core')['useVirtualList']>
     readonly useWakeLock: UnwrapRef<typeof import('@vueuse/core')['useWakeLock']>
-    readonly useWatcher: UnwrapRef<typeof import('./composables/alova')['useWatcher']>
     readonly useWebNotification: UnwrapRef<typeof import('@vueuse/core')['useWebNotification']>
     readonly useWebSocket: UnwrapRef<typeof import('@vueuse/core')['useWebSocket']>
     readonly useWebWorker: UnwrapRef<typeof import('@vueuse/core')['useWebWorker']>

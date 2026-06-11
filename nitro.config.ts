@@ -40,6 +40,8 @@ export default defineNitroConfig({
             },
             swr: false,
         },
+        '/api/archive/lists': { swr: 300 },
+        '/api/sqlite3/article/related-recom': { swr: 600 },
     },
     // 开启本地文件K/V存储
     storage: {

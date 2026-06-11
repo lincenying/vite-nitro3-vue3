@@ -102,6 +102,9 @@ vite-nitro3-vue3/
 │   │   ├── client.ts         # 数据库客户端
 │   │   ├── maps.ts           # 数据映射
 │   │   └── schema.ts         # Drizzle ORM 表结构定义
+│   ├── config/               # 服务端配置（JWT 等）
+│   ├── middleware/           # 全局中间件（鉴权等）
+│   ├── services/             # 业务服务层
 │   ├── plugins/              # Nitro 插件
 │   │   └── logs.ts           # 请求日志插件
 │   ├── routes/               # 自定义路由（如 Twig 模板渲染）
@@ -111,6 +114,7 @@ vite-nitro3-vue3/
 ├── src/                      # 前端源码
 │   ├── assets/               # 静态资源（字体、图标、SCSS、图片）
 │   ├── components/           # 组件（自动导入）
+│   ├── api/                  # API 请求模块（按业务拆分）
 │   ├── composables/          # 组合式函数（自动导入）
 │   │   ├── fetch.ts          # API 请求封装
 │   │   ├── asyncData.ts      # SSR 异步数据
@@ -137,10 +141,11 @@ vite-nitro3-vue3/
 ├── .output/                  # 构建产物（运行时生成）
 ├── .env.development          # 开发环境变量
 ├── .env.production           # 生产环境变量
+├── drizzle.config.ts         # Drizzle ORM 配置
 ├── nitro.config.ts           # Nitro 配置
 ├── vite.config.ts            # Vite 主配置
 ├── vite.config.components.ts # 自动导入配置
-├── vite.config.build.ts      # 构建配置
+├── vite.config.build.ts      # 客户端构建与分包配置
 ├── vite.config.css.ts        # CSS 配置
 ├── vite.config.macros.ts     # Vue Macros 配置
 ├── unocss.config.ts          # UnoCSS 配置
@@ -180,6 +185,20 @@ export const useSSR = false
 - 表结构定义在 [server/db/schema.ts](server/db/schema.ts)
 - 支持 Node.js (`better-sqlite3`) 和 Bun (`bun-sqlite`) 两种运行时
 - 通过 `NITRO_PRESET` 环境变量自动切换驱动
+- 开发环境首次使用需调用 `GET /api/sqlite3/init` 初始化表结构与默认用户（admin/editor/test，密码均为 `123456`）
+- 旧版 `server/api/sqlite/*` 接口已废弃，生产环境返回 410，请使用 `sqlite3/*`
+
+### JWT 鉴权
+
+- 登录接口 `POST /api/user/login` 校验 `auth_users` 表，签发 JWT 并写入 **HttpOnly Cookie**
+- 全局中间件 [server/middleware/auth.ts](server/middleware/auth.ts) 保护写操作与敏感接口
+- 前端通过 `GET /api/user/profile` 判断登录状态，Cookie 自动携带（`credentials: 'include'`）
+- 登出 `POST /api/user/logout` 清除 Cookie
+
+### API 分层
+
+- 前端请求统一在 [src/api/](src/api/) 按模块封装，Store 通过 `createContentStore` 工厂减少重复
+- 后端业务逻辑在 [server/services/](server/services/)，API handler 仅负责参数解析与响应
 
 ### 自动导入
 
@@ -292,6 +311,7 @@ docker rmi vite-nitro3-vue3     # 删除镜像
 | `VITE_APP_SSR_API`   | SSR 端 API 地址  | `http://localhost:18422/api`    |
 | `NITRO_PRESET`       | Nitro 运行预设   | `node_server` / `bun`           |
 | `NITRO_HOST_API_URL` | API 代理目标地址 | `https://php.mmxiaowu.com`      |
+| `NITRO_JWT_SECRET`   | JWT 签名密钥     | 生产环境务必修改                |
 | `PORT`               | 服务端口         | `18422`（开发）/ `8422`（预览） |
 
 ## Vite 配置文件
@@ -300,7 +320,8 @@ docker rmi vite-nitro3-vue3     # 删除镜像
 | ------------------------------------------------------ | ------------------------------- |
 | [vite.config.ts](vite.config.ts)                       | 主配置（插件、SSR、别名、解析） |
 | [vite.config.components.ts](vite.config.components.ts) | 自动导入组件 / API / 图标       |
-| [vite.config.build.ts](vite.config.build.ts)           | 构建和环境配置（代理、端口等）  |
+| [vite.config.build.ts](vite.config.build.ts)           | 客户端构建输出与 Rollup 分包    |
+| [drizzle.config.ts](drizzle.config.ts)                 | Drizzle Kit 迁移与推送配置      |
 | [vite.config.css.ts](vite.config.css.ts)               | CSS 预处理相关配置              |
 | [vite.config.macros.ts](vite.config.macros.ts)         | Vue Macros 编译期宏配置         |
 

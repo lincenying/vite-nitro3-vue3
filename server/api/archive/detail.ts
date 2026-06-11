@@ -1,9 +1,5 @@
-import type { ArchiveType } from '~server/types'
-import { eq } from 'drizzle-orm'
 import { defineEventHandler, getQuery, HTTPError } from 'h3'
-
-import { useArchiveDrizzle } from '~server/db/client'
-import { archive } from '~server/db/schema'
+import { getArchiveById } from '~server/services/archive.service'
 
 export default defineEventHandler(async (event) => {
     const id = getQuery<{ id: number }>(event).id
@@ -16,10 +12,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const db = useArchiveDrizzle()
-
-    const data = db.select().from(archive).where(eq(archive.c_id, Number(id))).get() as ArchiveType | undefined
-
+    const data = getArchiveById(Number(id))
     if (!data) {
         return new HTTPError({
             status: 404,

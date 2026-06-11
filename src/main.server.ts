@@ -40,10 +40,8 @@ export default async function render(url: string, template: string, context: { r
 
     const api = useApi(cookies, context.event)
 
-    console.log('%c[url] >> ', 'color: red', url)
     await router.push(url === '/' ? '/home' : url)
     await router.isReady()
-    console.log('server router ready')
 
     if (router.currentRoute.value.matched.length === 0) {
         return { html: '404 Not Found', cookies: '' }
@@ -57,8 +55,6 @@ export default async function render(url: string, template: string, context: { r
     const productStore = useProductStore(store)
     globalStore.setCookies(cookies)
     await productStore.getCategory(api)
-
-    console.log('%c[matchedComponents] >> ', 'color: red', matchedComponents.map(item => item.name))
 
     try {
         await Promise.all(

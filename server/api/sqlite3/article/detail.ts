@@ -1,9 +1,5 @@
-import { eq } from 'drizzle-orm'
 import { defineEventHandler, getQuery, HTTPError } from 'h3'
-
-import { useSqlite3Drizzle } from '~server/db/client'
-import { mapArticleRow } from '~server/db/maps'
-import { article } from '~server/db/schema'
+import { getArticleById } from '~server/services/article.service'
 
 export default defineEventHandler(async (event) => {
     const id = getQuery<{ id: number }>(event).id
@@ -16,11 +12,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const db = useSqlite3Drizzle()
-
-    const row = db.select().from(article).where(eq(article.id, Number(id))).get()
-    const data = row ? mapArticleRow(row) : undefined
-
+    const data = getArticleById(Number(id))
     if (!data) {
         return new HTTPError({
             status: 404,

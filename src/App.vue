@@ -1,5 +1,5 @@
 <template>
-    <div id="root" flex="~ col" :style="ISDEV ? 'display: none' : ''">
+    <div id="root" flex="~ col" :style="isDev ? 'display: none' : ''">
         <globalHeader v-if="!isLoginPage" />
         <router-view v-slot="{ Component }" class="body">
             <transition
@@ -8,11 +8,9 @@
                 @after-enter="handleAfterEnter"
                 @after-leave="handleAfterLeave"
             >
-                <keep-alive :include="cacheComponents">
-                    <Suspense>
-                        <component :is="Component" />
-                    </Suspense>
-                </keep-alive>
+                <Suspense>
+                    <component :is="Component" />
+                </Suspense>
             </transition>
         </router-view>
         <globalFooter v-if="!isLoginPage" />
@@ -24,12 +22,11 @@ defineOptions({
     name: 'AppRoot',
 })
 
-// pinia 状态管理 ===>
-const globalStore = useGlobalStore()
-
-const { ISDEV } = storeToRefs(globalStore)
-
 const userStore = useUserStore()
+
+const isDev = computed(() => {
+    return import.meta.env.VITE_APP_ENV === 'development'
+})
 
 const router = useRouter()
 
@@ -37,32 +34,9 @@ const isLoginPage = computed(() => {
     return router.currentRoute.value.name === 'login'
 })
 
-// const tmpCount = computed(() => globalStore.counter)
-// 监听状态变化
-globalStore.$subscribe((mutation, state) => {
-    if (mutation.events) {
-        let _Array = mutation.events
-        if (!Array.isArray(_Array)) {
-            _Array = [_Array]
-        }
-        _Array.forEach((item) => {
-            console.log(`%c[${mutation.storeId}.${item?.key}] <${mutation.type}> >>> ${item?.oldValue} => ${item?.newValue}`, 'color: red')
-        })
-    }
-    console.log('%c[state] >> ', 'color: red')
-    console.log(state)
-    console.log('%c<< [state]', 'color: red')
+provide(onLoginKey, (payload: Objable) => {
+    userStore.setInfo(payload)
 })
-// pinia 状态管理 <===
-
-const cacheComponents = ref('abc')
-
-// 全局组件通信 ===>
-provide(onLoginKey, (payload: string) => {
-    userStore.setToken(payload)
-    console.log('payload :>> ', payload)
-})
-// 全局组件通信 <===
 
 function handleBeforeEnter() {
 }

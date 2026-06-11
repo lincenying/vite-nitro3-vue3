@@ -1,7 +1,9 @@
 import { defineEventHandler } from 'h3'
 import { useDatabase } from 'nitro/database'
+import { requireDevelopment } from '~server/utils/auth-guard'
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+    requireDevelopment(event)
     const db = useDatabase()
 
     // Create users table

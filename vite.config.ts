@@ -48,17 +48,9 @@ export default defineConfig(({ mode, isSsrBuild }: ConfigEnv) => {
              * 检查Vite插件的中间状态
              * @see https://github.com/antfu/vite-plugin-inspect#readme
              */
-            Inspect(),
+            ...(mode === 'development' ? [Inspect()] : []),
         ],
-        nitro: {
-            imports: {
-            },
-            output: {
-                dir: '.output',
-                serverDir: '.output/server',
-                publicDir: '.output/public',
-            },
-        },
+        nitro: {},
         environments: {
             ssr: {
                 build: {

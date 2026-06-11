@@ -26,7 +26,7 @@ const config: { build: BuildOptions } = {
                     symbols: false, // 禁用符号压缩，避免变量名冲突
                 },
                 hoistTransitiveImports: false, // 禁止提升导入
-                inlineDynamicImports: false, // 确保动态导入不被内联
+                codeSplitting: false, // 确保动态导入不被内联
                 manualChunks(id: string) {
                     if (id.includes('node_modules')) {
                         if (id.includes('element-plus')) {
@@ -34,9 +34,6 @@ const config: { build: BuildOptions } = {
                         }
                         if (id.includes('markdown-it') || id.includes('codemirror')) {
                             return '2-markdown-it'
-                        }
-                        if (id.includes('vue-pdf')) {
-                            return '3-vue-pdf'
                         }
                         return '0-vendor'
                     }

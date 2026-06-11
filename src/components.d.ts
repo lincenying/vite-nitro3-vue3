@@ -38,7 +38,6 @@ declare module 'vue' {
     OtherLoading: typeof import('./components/other/loading.vue')['default']
     OtherRelatedRecom: typeof import('./components/other/related-recom.vue')['default']
     OtherTopBanner: typeof import('./components/other/top-banner.vue')['default']
-    PdfPreview: typeof import('./components/pdf/preview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
@@ -72,7 +71,6 @@ declare global {
   const OtherLoading: typeof import('./components/other/loading.vue')['default']
   const OtherRelatedRecom: typeof import('./components/other/related-recom.vue')['default']
   const OtherTopBanner: typeof import('./components/other/top-banner.vue')['default']
-  const PdfPreview: typeof import('./components/pdf/preview.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
 }

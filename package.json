@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@11.5.1",
+  "packageManager": "pnpm@11.5.3",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -22,7 +22,6 @@
     "@lincy/async-validation": "catalog:prod",
     "@lincy/utils": "catalog:prod",
     "@tanstack/vue-query": "catalog:prod",
-    "@tato30/vue-pdf": "catalog:prod",
     "@unhead/vue": "catalog:prod",
     "@unocss/reset": "catalog:prod",
     "@vueuse/core": "catalog:prod",

@@ -5,6 +5,7 @@
     "jsxImportSource": "vue",
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
+    "rootDir": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
     "paths": {

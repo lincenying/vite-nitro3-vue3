@@ -1,3 +1,13 @@
+## 2026-06-17 10:42:02
+
+### 修复 tsconfig.server.json TypeScript 6 rootDir 报错
+
+- 在 `tsconfig.server.json` 中显式设置 `rootDir: "."`，满足 TS 6 对 `outDir` 与源文件目录的明确要求
+
+**Commit:** fix: 修复 tsconfig.server.json 缺少 rootDir 的 TS 6 报错
+
+---
+
 ## 2026-06-11 16:44:35
 
 ### 修复登录时 auth_users 表不存在

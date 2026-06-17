@@ -1,11 +1,11 @@
 {
-  "include": ["src/**/*", "template.html"],
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
+    "rootDir": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
     "paths": {
@@ -30,6 +30,7 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0"
   },
+  "include": ["src/**/*", "template.html"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*", "server/**/*", ".nitro/**/*", ".output/**/*"],
 
   "vueCompilerOptions": {

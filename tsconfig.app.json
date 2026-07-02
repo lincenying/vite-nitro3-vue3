@@ -30,7 +30,7 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src/**/*", "template.html"],
+  "include": ["src/**/*", "template.html", "./*.ts"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*", "server/**/*", ".nitro/**/*", ".output/**/*"],
 
   "vueCompilerOptions": {

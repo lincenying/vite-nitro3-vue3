@@ -2,9 +2,9 @@
     <div class="global-wrap pdf-wrap">
         <OtherTopBanner title="Markdown编辑器" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
-            <div flex-auto max-w-1294px text-hex-8a8a8a lt-m1360="mx-24px">当前位置：<router-link to="/">首页</router-link> » 编辑器</div>
+            <div flex-auto max-w-1294px text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<router-link to="/">首页</router-link> » 编辑器</div>
         </div>
-        <div flex="~ justify-center" my-24px lt-m1360="mx-24px">
+        <div flex="~ justify-center" my-24px lt-s1366="mx-24px">
             <div w-1294px flex="~ justify-between col">
                 <global-client-only>
                     <h5 text-16px hex-202935 mb-16px>Markdown编辑器</h5>

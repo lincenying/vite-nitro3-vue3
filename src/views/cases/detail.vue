@@ -1,18 +1,18 @@
 <template>
-    <div class="global-wrap index-wrap">
+    <div v-loading="loading" class="global-wrap index-wrap">
         <OtherTopBanner title="案例展示" intro="这是一段描述文字，可以自定义你想要的文字" :img="topBannerImg"></OtherTopBanner>
         <div ref="navigation" class="navigation" flex="~ justify-center items-center" h-42px bg-hex-fff>
             <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<router-link to="/">首页</router-link> » <router-link to="/cases">案例展示</router-link> » 案例详情</div>
         </div>
         <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
-                    <el-affix :offset="104">
+            <div class="page-layout">
+                <div class="page-sidebar">
+                    <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
-                        <NewsRecommend></NewsRecommend>
+                        <CasesRecommend></CasesRecommend>
                     </el-affix>
                 </div>
-                <div class="main" w-1px ml-24px flex="auto">
+                <div class="page-main">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
                             <ContentDetailSkeleton />

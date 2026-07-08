@@ -27,8 +27,7 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "ignoreDeprecations": "6.0"
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "template.html", "./*.ts"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*", "server/**/*", ".nitro/**/*", ".output/**/*"],

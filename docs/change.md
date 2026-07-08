@@ -1,3 +1,13 @@
+## 2026-07-08 13:58:00
+
+### 修复开发环境 Nitro 503 不可用错误
+
+- `fetch.ts` 在开发环境 SSR 阶段对 HTTP 503 自动重试（最多 5 次），缓解 Nitro Vite 环境启动竞态导致的 `Vite environment "nitro" is unavailable` 报错
+
+**Commit:** fix: 开发环境 SSR 请求对 Nitro 503 自动重试
+
+---
+
 ## 2026-06-17 10:42:02
 
 ### 修复 tsconfig.server.json TypeScript 6 rootDir 报错

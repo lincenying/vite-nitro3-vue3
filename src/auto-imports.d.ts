@@ -41,6 +41,7 @@ declare global {
   const computedEager: typeof import('@vueuse/core').computedEager
   const computedInject: typeof import('@vueuse/core').computedInject
   const computedWithControl: typeof import('@vueuse/core').computedWithControl
+  const confirmMsg: typeof import('./composables/message').confirmMsg
   const controlledComputed: typeof import('@vueuse/core').controlledComputed
   const controlledRef: typeof import('@vueuse/core').controlledRef
   const createApp: typeof import('vue').createApp
@@ -87,12 +88,15 @@ declare global {
   const faqsStoreWithout: typeof import('./stores/use-faqs-store').faqsStoreWithout
   const fetchArticleDetail: typeof import('./api/article').fetchArticleDetail
   const fetchArticleList: typeof import('./api/article').fetchArticleList
+  const fetchArticleRecommend: typeof import('./api/article').fetchArticleRecommend
   const fetchArticleRelatedRecom: typeof import('./api/article').fetchArticleRelatedRecom
   const fetchCasesDetail: typeof import('./api/cases').fetchCasesDetail
   const fetchCasesList: typeof import('./api/cases').fetchCasesList
+  const fetchCasesRecommend: typeof import('./api/cases').fetchCasesRecommend
   const fetchCasesRelatedRecom: typeof import('./api/cases').fetchCasesRelatedRecom
   const fetchFaqsDetail: typeof import('./api/faqs').fetchFaqsDetail
   const fetchFaqsList: typeof import('./api/faqs').fetchFaqsList
+  const fetchFaqsRecommend: typeof import('./api/faqs').fetchFaqsRecommend
   const fetchFaqsRelatedRecom: typeof import('./api/faqs').fetchFaqsRelatedRecom
   const fetchNewsDetail: typeof import('./api/news').fetchNewsDetail
   const fetchNewsList: typeof import('./api/news').fetchNewsList
@@ -164,6 +168,7 @@ declare global {
   const productDetailStore: typeof import('./composables/storage').productDetailStore
   const productListStore: typeof import('./composables/storage').productListStore
   const productStoreWithout: typeof import('./stores/use-product-store').productStoreWithout
+  const promptMsg: typeof import('./composables/message').promptMsg
   const provide: typeof import('vue').provide
   const provideLocal: typeof import('@vueuse/core').provideLocal
   const reactify: typeof import('@vueuse/core').reactify
@@ -485,6 +490,7 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
+    readonly confirmMsg: UnwrapRef<typeof import('./composables/message')['confirmMsg']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -530,12 +536,15 @@ declare module 'vue' {
     readonly faqsStoreWithout: UnwrapRef<typeof import('./stores/use-faqs-store')['faqsStoreWithout']>
     readonly fetchArticleDetail: UnwrapRef<typeof import('./api/article')['fetchArticleDetail']>
     readonly fetchArticleList: UnwrapRef<typeof import('./api/article')['fetchArticleList']>
+    readonly fetchArticleRecommend: UnwrapRef<typeof import('./api/article')['fetchArticleRecommend']>
     readonly fetchArticleRelatedRecom: UnwrapRef<typeof import('./api/article')['fetchArticleRelatedRecom']>
     readonly fetchCasesDetail: UnwrapRef<typeof import('./api/cases')['fetchCasesDetail']>
     readonly fetchCasesList: UnwrapRef<typeof import('./api/cases')['fetchCasesList']>
+    readonly fetchCasesRecommend: UnwrapRef<typeof import('./api/cases')['fetchCasesRecommend']>
     readonly fetchCasesRelatedRecom: UnwrapRef<typeof import('./api/cases')['fetchCasesRelatedRecom']>
     readonly fetchFaqsDetail: UnwrapRef<typeof import('./api/faqs')['fetchFaqsDetail']>
     readonly fetchFaqsList: UnwrapRef<typeof import('./api/faqs')['fetchFaqsList']>
+    readonly fetchFaqsRecommend: UnwrapRef<typeof import('./api/faqs')['fetchFaqsRecommend']>
     readonly fetchFaqsRelatedRecom: UnwrapRef<typeof import('./api/faqs')['fetchFaqsRelatedRecom']>
     readonly fetchNewsDetail: UnwrapRef<typeof import('./api/news')['fetchNewsDetail']>
     readonly fetchNewsList: UnwrapRef<typeof import('./api/news')['fetchNewsList']>
@@ -607,6 +616,7 @@ declare module 'vue' {
     readonly productDetailStore: UnwrapRef<typeof import('./composables/storage')['productDetailStore']>
     readonly productListStore: UnwrapRef<typeof import('./composables/storage')['productListStore']>
     readonly productStoreWithout: UnwrapRef<typeof import('./stores/use-product-store')['productStoreWithout']>
+    readonly promptMsg: UnwrapRef<typeof import('./composables/message')['promptMsg']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>

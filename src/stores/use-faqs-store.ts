@@ -6,11 +6,13 @@ import { createContentStore, setupStoreHMR } from './create-content-store'
 const usePiniaStore = createContentStore<
     FaqsState['index'],
     FaqsType,
+    FaqsType,
     FaqsType
 >('faqsStore', {
     fetchList: faqsApi.fetchFaqsList,
     fetchDetail: faqsApi.fetchFaqsDetail,
     fetchRelatedRecom: faqsApi.fetchFaqsRelatedRecom,
+    fetchRecommend: faqsApi.fetchFaqsRecommend,
 })
 
 export default usePiniaStore

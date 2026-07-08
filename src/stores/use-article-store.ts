@@ -6,11 +6,13 @@ import { createContentStore, setupStoreHMR } from './create-content-store'
 const usePiniaStore = createContentStore<
     ArticleState['index'],
     ArticleType,
+    ArticleType,
     ArticleType
 >('articleStore', {
     fetchList: articleApi.fetchArticleList,
     fetchDetail: articleApi.fetchArticleDetail,
     fetchRelatedRecom: articleApi.fetchArticleRelatedRecom,
+    fetchRecommend: articleApi.fetchArticleRecommend,
 })
 
 export default usePiniaStore

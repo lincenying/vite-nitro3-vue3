@@ -5,14 +5,14 @@
             <div max-w-1294px flex-auto text-hex-8a8a8a lt-s1366="mx-24px">当前位置：<router-link to="/">首页</router-link> » <router-link to="/faqs">常见问题</router-link> » 问题详情</div>
         </div>
         <div flex="~ justify-center" mt-24px lt-s1366="mx-24px">
-            <div flex="~ auto justify-between" max-w-1294px>
-                <div class="sidebar" w-320px>
-                    <el-affix :offset="104">
+            <div class="page-layout">
+                <div class="page-sidebar">
+                    <el-affix ref="affix" :offset="104">
                         <HomeRecommend></HomeRecommend>
-                        <NewsRecommend></NewsRecommend>
+                        <FaqsRecommend></FaqsRecommend>
                     </el-affix>
                 </div>
-                <div class="main" w-1px ml-24px flex="auto">
+                <div class="page-main">
                     <el-skeleton :loading="loading" animated>
                         <template #template>
                             <ContentDetailSkeleton />
@@ -42,7 +42,7 @@
 import type { ElAffixType } from '~/types/global.types'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 import { appName } from '~/constants'
-import { scrollToNav } from '~/utils'
+import { scrollToElement } from '~/utils'
 
 defineOptions({
     name: 'RouterFaqsDetail',
@@ -91,7 +91,7 @@ async function initFunc() {
         commentStore.getComment({ type: 'faqs', id, page: 1 }),
     ])
     loading.value = false
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 }
 
 watch(() => id, (newId) => {

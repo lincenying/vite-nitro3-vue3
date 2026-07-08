@@ -13,3 +13,7 @@ export function fetchFaqsDetail(api: ApiType, id: string) {
 export function fetchFaqsRelatedRecom(api: ApiType) {
     return api.get<FaqsType[]>('/faqs/related-recom')
 }
+
+export function fetchFaqsRecommend(api: ApiType) {
+    return api.get<FaqsType[]>('/faqs/recommend')
+}

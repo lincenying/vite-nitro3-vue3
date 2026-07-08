@@ -14,3 +14,7 @@ export function fetchCasesDetail(api: ApiType, id: string) {
 export function fetchCasesRelatedRecom(api: ApiType) {
     return api.get<CasesType[]>('/cases/related-recom')
 }
+
+export function fetchCasesRecommend(api: ApiType) {
+    return api.get<CasesType[]>('/cases/recommend')
+}

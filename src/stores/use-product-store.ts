@@ -1,8 +1,8 @@
 import type { ProductCategory, ProductState } from '../types/pinia.types'
 import type { ProductDetailType } from '~/types/home.types'
-import * as productApi from '~/api/product'
 import { isEmpty } from '@lincy/utils'
 import { acceptHMRUpdate } from 'pinia'
+import * as productApi from '~/api/product'
 import { defaultList } from '~/constants'
 
 interface PayloadType {

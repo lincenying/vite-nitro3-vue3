@@ -76,11 +76,16 @@ export const useApi: (cookies?: Record<string, string | number | boolean>, H3Eve
                 pendingRequest.set(this.abortKey, controller)
             }
 
+            const isDevSSR = isSSR && import.meta.env.VITE_APP_ENV === 'development'
             const response = await apiFetch(url, {
                 method,
                 query: method === 'get' ? data : undefined,
                 body: method === 'get' ? undefined : data,
                 timeout: 10000, // Timeout after 10 seconds
+                // 开发环境 SSR 可能在 Nitro 环境尚未就绪时请求 API，对 503 自动重试
+                retry: isDevSSR ? 5 : 0,
+                retryDelay: 200,
+                retryStatusCodes: [503],
                 signal,
                 ...options,
                 headers: {

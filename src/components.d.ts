@@ -13,6 +13,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ArticleDialogPost: typeof import('./components/article/dialog-post.vue')['default']
+    ArticleRecommend: typeof import('./components/article/recommend.vue')['default']
+    CasesRecommend: typeof import('./components/cases/recommend.vue')['default']
     ContentDetailContent: typeof import('./components/content/detail-content.vue')['default']
     ContentDetailSkeleton: typeof import('./components/content/detail-skeleton.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
@@ -27,6 +29,7 @@ declare module 'vue' {
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     EmptyComponents: typeof import('./components/empty-components.vue')['default']
+    FaqsRecommend: typeof import('./components/faqs/recommend.vue')['default']
     GlobalClientOnly: typeof import('./components/global/client-only.vue')['default']
     GlobalDialog: typeof import('./components/global/dialog.vue')['default']
     GlobalDigital: typeof import('./components/global/digital.tsx')['default']
@@ -37,17 +40,23 @@ declare module 'vue' {
     NewsRecommend: typeof import('./components/news/recommend.vue')['default']
     OtherCommentPost: typeof import('./components/other/comment-post.vue')['default']
     OtherComments: typeof import('./components/other/comments.vue')['default']
+    OtherErrorPage: typeof import('./components/other/error-page.vue')['default']
     OtherLoading: typeof import('./components/other/loading.vue')['default']
     OtherRelatedRecom: typeof import('./components/other/related-recom.vue')['default']
     OtherTopBanner: typeof import('./components/other/top-banner.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }
 
 // For TSX support
 declare global {
   const ArticleDialogPost: typeof import('./components/article/dialog-post.vue')['default']
+  const ArticleRecommend: typeof import('./components/article/recommend.vue')['default']
+  const CasesRecommend: typeof import('./components/cases/recommend.vue')['default']
   const ContentDetailContent: typeof import('./components/content/detail-content.vue')['default']
   const ContentDetailSkeleton: typeof import('./components/content/detail-skeleton.vue')['default']
   const ElAffix: typeof import('element-plus/es')['ElAffix']
@@ -62,6 +71,7 @@ declare global {
   const ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
   const ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
   const EmptyComponents: typeof import('./components/empty-components.vue')['default']
+  const FaqsRecommend: typeof import('./components/faqs/recommend.vue')['default']
   const GlobalClientOnly: typeof import('./components/global/client-only.vue')['default']
   const GlobalDialog: typeof import('./components/global/dialog.vue')['default']
   const GlobalDigital: typeof import('./components/global/digital.tsx')['default']
@@ -72,6 +82,7 @@ declare global {
   const NewsRecommend: typeof import('./components/news/recommend.vue')['default']
   const OtherCommentPost: typeof import('./components/other/comment-post.vue')['default']
   const OtherComments: typeof import('./components/other/comments.vue')['default']
+  const OtherErrorPage: typeof import('./components/other/error-page.vue')['default']
   const OtherLoading: typeof import('./components/other/loading.vue')['default']
   const OtherRelatedRecom: typeof import('./components/other/related-recom.vue')['default']
   const OtherTopBanner: typeof import('./components/other/top-banner.vue')['default']

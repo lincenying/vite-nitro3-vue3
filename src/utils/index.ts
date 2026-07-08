@@ -74,9 +74,3 @@ export function scrollToElement(element: Ref<HTMLElement | undefined>, adjust: n
     }
     window.scrollTo({ top: top || 0, behavior: 'smooth' })
 }
-
-/** @deprecated 使用 scrollToElement */
-export const scrollToNav = scrollToElement
-
-/** @deprecated 使用 scrollToElement */
-export const scrollToComment = scrollToElement

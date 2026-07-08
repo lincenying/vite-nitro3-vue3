@@ -42,7 +42,7 @@
 import type { ElAffixType } from '~/types/global.types'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 import { appName } from '~/constants'
-import { scrollToNav } from '~/utils'
+import { scrollToElement } from '~/utils'
 
 defineOptions({
     name: 'RouterCasesDetail',
@@ -91,7 +91,7 @@ async function initFunc() {
         commentStore.getComment({ type: 'cases', id, page: 1 }),
     ])
     loading.value = false
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 }
 
 watch(() => id, (newId) => {

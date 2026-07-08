@@ -49,7 +49,7 @@
 import type { ElAffixType } from '~/types/global.types'
 import topBannerImg from '@/assets/images/home/page-banner.jpg'
 import { appName } from '~/constants'
-import { scrollToNav } from '~/utils'
+import { scrollToElement } from '~/utils'
 
 defineOptions({
     name: 'RouterFaqs',
@@ -89,7 +89,7 @@ const navigation = ref<HTMLElement>()
 
 watch(() => [category, tag], () => {
     page = 1
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 })
 
 const loading = ref<boolean>(false)
@@ -99,7 +99,7 @@ async function currentChange(newPage: number) {
     page = newPage
     await faqsStore.getIndex(payload.value)
     loading.value = false
-    scrollToNav(navigation, -80)
+    scrollToElement(navigation, -80)
 }
 
 const affix = ref<ElAffixType>()

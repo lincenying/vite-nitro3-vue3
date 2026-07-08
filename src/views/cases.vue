@@ -77,13 +77,12 @@ defineOptions({
 
         const globalStore = useGlobalStore(store)
         const productStore = useProductStore(store)
-        const newsStore = useNewsStore(store)
         const casesStore = useCasesStore(store)
 
         return Promise.all([
             casesStore.getIndex({ page: 1, pageSize: 12, category, tag }, api),
             productStore.getRecommend(api),
-            newsStore.getRecommend(api),
+            casesStore.getRecommend(api),
             globalStore.setMenuActive('cases'),
         ])
     },

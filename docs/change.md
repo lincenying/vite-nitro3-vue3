@@ -1,3 +1,13 @@
+## 2026-07-09 11:42:45
+
+### 修复 TypeScript 6 baseUrl 弃用报错
+
+- 从 `tsconfig.app.json`、`tsconfig.server.json` 移除已弃用的 `baseUrl`（值为 `.` 时可直接删除，`paths` 仍相对配置文件目录解析）
+
+**Commit:** fix: 移除 tsconfig 中已弃用的 baseUrl 配置
+
+---
+
 ## 2026-07-08 13:58:00
 
 ### 修复开发环境 Nitro 503 不可用错误
